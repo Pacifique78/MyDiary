@@ -1,0 +1,47 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    },
+    "eslint.validate":[  
+        {  
+            "language":"vue",
+            "autoFix":true
+        },
+        {  
+            "language":"html",
+            "autoFix":true
+        },
+        {  
+            "language":"javascript",
+            "autoFix":true
+        },
+        {  
+            "language":"typescript",
+            "autoFix":true
+        }
+    ]
+}
