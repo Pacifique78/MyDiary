@@ -9,9 +9,11 @@
         "sourceType": "module"
     },
     "rules": {
+        "no-console":"off",
+        "no-undef":"off",
         "indent": [
             "error",
-            "tab"
+            4
         ],
         "linebreak-style": [
             "error",
@@ -25,23 +27,5 @@
             "error",
             "always"
         ]
-    },
-    "eslint.validate":[  
-        {  
-            "language":"vue",
-            "autoFix":true
-        },
-        {  
-            "language":"html",
-            "autoFix":true
-        },
-        {  
-            "language":"javascript",
-            "autoFix":true
-        },
-        {  
-            "language":"typescript",
-            "autoFix":true
-        }
-    ]
+    }
 }
