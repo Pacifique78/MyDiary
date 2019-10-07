@@ -49,7 +49,9 @@ class usersClass{
                 return res.status(200).json({
                     status: 200,
                     message: 'User logged in successfully',
-                    token
+                    data: {
+                        token
+                    }
                 });
             }
             return res.status(401).json({

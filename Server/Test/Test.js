@@ -74,7 +74,7 @@ describe('User Signin', ()=>{
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body).to.have.property('message');
-                expect(res.body).to.have.property('token');
+                expect(res.body).to.have.property('data');
                 done();
             });
     });
