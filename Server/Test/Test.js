@@ -63,3 +63,58 @@ describe('User SignUp', ()=>{
             });
     });
 });
+describe('User Signin', ()=>{
+    it('Should allow a user to signin', (done)=>{
+        const testUser = {
+            'email':'systemadmin@gmail.com',
+            'password':'admin'
+        };
+        chai.request(app).post('/api/v1/auth/signin')
+            .send(testUser)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.property('message');
+                expect(res.body).to.have.property('token');
+                done();
+            });
+    });
+    it('Should NOT allow a user to signin: Email not found', (done)=>{
+        const testUser2 = {
+            'email':'testUser1@gmail.com',
+            'password':'password'
+        };
+        chai.request(app).post('/api/v1/auth/signin')
+            .send(testUser2)
+            .end((err, res) => {
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.property('error');
+                done();
+            });
+    });
+    it('Should NOT allow a user to signin: Incorrect password', (done)=>{
+        const testUser3 = {
+            'email':'systemadmin@gmail.com',
+            'password':'password'
+        };
+        chai.request(app).post('/api/v1/auth/signin')
+            .send(testUser3)
+            .end((err, res) => {
+                expect(res).to.have.status(401);
+                expect(res.body).to.have.property('error');
+                done();
+            });
+    });
+    it('Should NOT allow a user to signin: Invalid input or missing input', (done)=>{
+        const testUser1 = {
+            'email':'systemadmin@gmail.com',
+            //"password":"password"
+        };
+        chai.request(app).post('/api/v1/auth/signin')
+            .send(testUser1)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body).to.have.property('error');
+                done();
+            });
+    });
+});
