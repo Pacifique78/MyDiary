@@ -26,11 +26,8 @@ class usersClass{
                 status:201,
                 message: 'User created',
                 data: {
-                    firstName,
-                    lastName,
-                    email
-                },
-                token
+                    token
+                }
             });
         }
     }
