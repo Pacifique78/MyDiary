@@ -118,3 +118,65 @@ describe('User Signin', ()=>{
             });
     });
 });
+describe('Create a new entry', ()=>{
+    it('Should return a success: new entry created', (done)=>{
+        const testEntry1= {
+            'title': 'My title',
+            'description': 'My description'
+        };
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        chai.request(app).post('/api/v1/entries')
+            .set('Authorization', token)
+            .send(testEntry1) 
+            .end((err, res) => {
+                expect(res).to.have.status(201);
+                expect(res.body.data).to.be.a('object');
+            });
+        done();
+    });
+    it('Should return an error: Title already used', (done)=>{
+        const testentry2= {
+            'title':'My First Program',
+            'description':'My description'
+        };
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        chai.request(app).post('/api/v1/entries') 
+            .set('Authorization', token)
+            .send(testentry2)
+            .end((err, res) => {
+                expect(res).to.have.status(409);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+    it('Should return an error: Invalid data', (done) =>{
+        const testEntry4= {
+            'title':true,
+            'description':'hey there'
+        };
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        chai.request(app).post('/api/v1/entries')
+            .set('Authorization', token)
+            .send(testEntry4)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+    it('Should return an error: Token is not provided', (done) => {
+        const testEntry5= {
+            'title': 'diary',
+            'description':'my new diary'
+        };
+        const token = '';
+        chai.request(app).post('/api/v1/entries')
+            .set('Authorization', token)
+            .send(testEntry5)
+            .end((err, res) => {
+                expect(res).to.have.status(401);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+});

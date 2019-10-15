@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
 import users from '../Model/userModel';
+import entries from '../Model/entriesModel';
 import jwt from 'jsonwebtoken';
+import moment from 'moment';
 class usersClass{
     async createUser(req, res){
         const{email} = req.body;
@@ -63,6 +65,37 @@ class usersClass{
             status: 404,
             error: 'Email not found'
         });
+    }
+    async createEntry(req, res){
+        const {title, description} = req.body;
+        const myEntries = [];
+        for(let entry of entries){
+            if(entry.createdBy === req.tokenData.email){
+                myEntries.push(entry);
+            }
+        }
+        const entryFound = myEntries.find(myEntrie=>myEntrie.title === title);
+        if(entryFound){
+            return res.status(409).json({
+                status:409,
+                error: 'Entry with such title already exists'
+            });
+        }
+        else{
+            const id = entries.length + 1, createdBy = req.tokenData.email, createdOn = moment().format('LLL');
+            const newEntry = {id, createdBy, createdOn, title, description};
+            entries.push(newEntry);
+            return res.status(201).json({
+                status:201,
+                data: {
+                    id,
+                    message:'Entry created successfully',
+                    createdOn,
+                    title,
+                    description
+                }
+            });
+        }
     }
 }
 const newClass = new usersClass();
