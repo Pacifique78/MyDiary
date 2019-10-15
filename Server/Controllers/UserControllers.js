@@ -97,6 +97,36 @@ class usersClass{
             });
         }
     }
+    modifyEntry(req, res){
+        const id = parseInt(req.params.entryId);
+        const {title, description} = req.body;
+        const entryFound = entries.find(entry=>entry.id === id);
+        if(!entryFound){
+            return res.status(404).json({
+                status:404,
+                error: 'Entry with such id not found'
+            });
+        }
+        else{
+            if(entryFound.createdBy === req.tokenData.email){
+                entryFound.title = title;
+                entryFound.description = description;
+                return res.status(200).json({
+                    status:201,
+                    data: {
+                        message:'Entry successfully edited',
+                        id,
+                        title,
+                        description
+                    }
+                });
+            }
+            return res.status(401).json({
+                status:401,
+                error: 'Not yours to modify'
+            });
+        }
+    }
 }
 const newClass = new usersClass();
 export default newClass;
