@@ -261,3 +261,49 @@ describe('Modify an entry', ()=>{
             });
     });
 });
+describe('Delete an entry', () => {
+    it('Should allow successfully: entry deleted successfully', (done) => {
+        const entryId = 1;
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        chai.request(app).delete(`/api/v1/entries/${entryId}`)
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.property('data');
+            });
+        done();
+    });
+    it('Should Not delete an entry : entry id not found', (done) => {
+        const entryId = 100;
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        chai.request(app).delete(`/api/v1/entries/${entryId}/`)
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+    it('Should not delete an entry: not yours to delete', (done) => {
+        const entries2 = 2;
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        chai.request(app).delete(`/api/v1/entries/${entries2}`)
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(401);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+    it('Should not delete an entry: token not provided', (done) => {
+        const entryId4 = 1;
+        const token = '';
+        chai.request(app).delete(`/api/v1/entries/${entryId4}`)
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(401);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+});
