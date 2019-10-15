@@ -307,3 +307,25 @@ describe('Delete an entry', () => {
         done();
     });
 });
+describe('Get all entries', ()=>{
+    it('Should should return all entries', (done)=>{
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        chai.request(app).get('/api/v1/entries') 
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.property('data');
+            });
+        done();
+    });
+    it('Shouls not return all mentors: Token is not provided', (done) => {
+        const token = '';
+        chai.request(app).get('/api/v1/entries')
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(401);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+});

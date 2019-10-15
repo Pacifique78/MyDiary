@@ -152,6 +152,18 @@ class usersClass{
             });
         }
     }
+    getEntries(req, res){
+        const myEntries = [];
+        for(let entry of entries){
+            if(entry.createdBy === req.tokenData.email){
+                myEntries.push(entry);
+            }
+        }
+        return res.status(200).json({
+            status:200,
+            data: myEntries
+        });
+    }
 }
 const newClass = new usersClass();
 export default newClass;
