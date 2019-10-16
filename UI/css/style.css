@@ -1,0 +1,158 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Saira Stencil One', Arial, Helvetica, sans-serif;
+}
+.container{
+    background: linear-gradient(150deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 60%), #464646;
+    height: 100%;
+    width: 100%;
+}
+.header{
+    padding: 5% 15%;
+}
+.header nav{
+    float: right;
+    height: 85px;
+    display: flex;
+    align-items: center;
+}
+.header ul li{
+    float: left;
+    padding: 0 25px;
+    list-style: none;
+    color: #000; 
+}
+ul li:hover{
+    color: #5A1B00; 
+}
+ul li a{
+    text-decoration: none;
+}
+.home-container{
+    margin: 5% auto;
+    text-align: center;
+}
+.home-container .home-images{
+    display: flex;
+    justify-content: center;
+}
+.home-images img{
+    margin: 0 5%;
+}
+.home-container h1{
+    width: 30%;
+    height: 200px;
+    padding: 5% 0;
+}
+.home-container button{
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 5px;
+    background-color:unset;
+    padding: 0.2% 2%;
+    margin: 3%;
+    border: black solid;
+    color: #5A1B00;
+}
+.home-container button:hover{
+    background-color: #5A1b00;
+    border: black solid;
+    color: black;
+}
+.about-container{
+    width: 50%;
+    margin: auto;
+    justify-content: center;
+}
+.about-container h2{
+    padding: 5%;
+}
+#login{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top:0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    display: none;
+}
+#login-form{
+    width: 30%;
+    height: 300px;
+    background-color: white;
+    position: relative;
+    text-align: center;
+    display: none;
+}
+#login-form input{
+    width: 50%;
+    margin: 10px auto;
+    display: block;
+    border: none;
+    border-bottom: 2px solid #5A1B00;
+    border-radius: 5px;
+    padding: 1%;
+    font-size: 14px;
+}
+form button{
+    background-color: unset;
+    color: #5A1B00;
+    padding: 3px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: #5A1B00 solid;
+    margin-top: 3%;
+}
+form button:hover{
+    background-color: #5A1B00;
+    color: #000;
+}
+#create-account{
+    width: 30%;
+    height: 330px;
+    background-color: white;
+    position: relative;
+    text-align: center;
+    display: none;
+}
+.close{
+    top: 0;
+    right: 2%;
+    position: absolute;
+    font-size: 40px;
+    cursor: pointer;
+}
+#create-account input{
+    width: 50%;
+    margin: 1% auto;
+    display: block;
+    border: none;
+    border-bottom: 2px solid #5A1B00;
+    border-radius: 5px;
+    padding: 1%;
+    font-size: 14px;
+}
+form{
+    margin: 15% auto;
+}
+form button{
+    background-color: unset;
+    color: #5A1B00;
+    padding: 1% 2%;
+    font-size: 80%;
+    border-radius: 5px;
+    border: #5A1B00 solid;
+    margin-top: 3%;
+    cursor: pointer;
+}
+form button:hover{
+    background-color: #5A1B00;
+    color: #000;
+}
+form a{
+    text-decoration: none;
+    color: #5A1B00;
+}
