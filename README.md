@@ -4,7 +4,9 @@
 # MyDiary
 [![Build Status](https://travis-ci.org/Pacifique78/MyDiary.svg?branch=develop)](https://travis-ci.org/Pacifique78/MyDiary)
 [![Coverage Status](https://coveralls.io/repos/github/Pacifique78/MyDiary/badge.svg?branch=develop)](https://coveralls.io/github/Pacifique78/MyDiary?branch=develop)
-MyDiary is an online journal where users can pen down their thoughts and feelings.
+
+
+#MyDiary is an online journal where users can pen down their thoughts and feelings.
 ## Features
 * Users can sign up
 * Users can sign in
