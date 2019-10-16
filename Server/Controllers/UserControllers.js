@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
 import users from '../Model/userModel';
+import entries from '../Model/entriesModel';
 import jwt from 'jsonwebtoken';
+import moment from 'moment';
 class usersClass{
     async createUser(req, res){
         const{email} = req.body;
@@ -60,6 +62,67 @@ class usersClass{
             status: 404,
             error: 'Email not found'
         });
+    }
+    async createEntry(req, res){
+        const {title, description} = req.body;
+        const myEntries = [];
+        for(let entry of entries){
+            if(entry.createdBy === req.tokenData.email){
+                myEntries.push(entry);
+            }
+        }
+        const entryFound = myEntries.find(myEntrie=>myEntrie.title === title);
+        if(entryFound){
+            return res.status(409).json({
+                status:409,
+                error: 'Entry with such title already exists'
+            });
+        }
+        else{
+            const id = entries.length + 1, createdBy = req.tokenData.email, createdOn = moment().format('LLL');
+            const newEntry = {id, createdBy, createdOn, title, description};
+            entries.push(newEntry);
+            return res.status(201).json({
+                status:201,
+                data: {
+                    id,
+                    message:'Entry created successfully',
+                    createdOn,
+                    title,
+                    description
+                }
+            });
+        }
+    }
+    modifyEntry(req, res){
+        const id = parseInt(req.params.entryId);
+        const {title, description} = req.body;
+        const entryFound = entries.find(entry=>entry.id === id);
+        if(!entryFound){
+            return res.status(404).json({
+                status:404,
+                error: 'Entry with such id not found'
+            });
+        }
+        else{
+            if(entryFound.createdBy === req.tokenData.email){
+                entryFound.title = title;
+                entryFound.description = description;
+                return res.status(200).json({
+                    status:201,
+                    data: {
+                        message:'Entry successfully edited',
+                        id,
+                        title,
+                        description
+                    }
+                });
+            }
+            return res.status(401).json({
+                status:401,
+                error: 'Not yours to modify'
+            });
+        }
     }
 }
 const newClass = new usersClass();
