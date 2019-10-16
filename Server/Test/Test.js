@@ -197,10 +197,26 @@ describe('Modify an entry', ()=>{
                 done();
             });
     });
+    it('Should return an error: Invalid data', (done) =>{
+        const entryId5 = 1;
+        const testEntry5= {
+            'tile':'hello',
+            'description':'hey there'
+        };
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        chai.request(app).patch(`/api/v1/entries/${entryId5}`)
+            .set('Authorization', token)
+            .send(testEntry5)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
     it('Should return an error: entry not found', (done)=>{
-        const entryId2 = 500;
+        const entryId2 = 300;
         const testEntry2= {
-            'title': 'My First Program',
+            'title': 'Le 21 dec 2019',
             'description':'my new diary'
         };
         const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
@@ -246,15 +262,15 @@ describe('Modify an entry', ()=>{
             });
     });
     it('Should not return a success: Invalid params', (done)=>{
-        const entryId5 = '2-';
-        const testEntry5= {
+        const entryId6 = '2-';
+        const testEntry6= {
             'title': 'My First Program',
             'description':'my new diary'
         };
         const  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
-        chai.request(app).patch(`/api/v1/entries/${entryId5}`) 
+        chai.request(app).patch(`/api/v1/entries/${entryId6}`) 
             .set('Authorization', token)
-            .send(testEntry5)
+            .send(testEntry6)
             .end((err, res) => {
                 expect(res).to.have.status(400);
                 done();
@@ -306,6 +322,16 @@ describe('Delete an entry', () => {
             });
         done();
     });
+    it('Should not delete an entry: Invalid params', (done)=>{
+        const entryId5 = '2-';
+        const  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        chai.request(app).patch(`/api/v1/entries/${entryId5}`) 
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                done();
+            });
+    });
 });
 describe('Get all entries', ()=>{
     it('Should should return all entries', (done)=>{
@@ -325,6 +351,63 @@ describe('Get all entries', ()=>{
             .end((err, res) => {
                 expect(res).to.have.status(401);
                 expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+});
+describe('Get specific entry', ()=>{
+    it('Should not return an entry : entryId not found', (done)=>{
+        const entryId2= 300;
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        chai.request(app).get(`/api/v1/entries/${entryId2}`) 
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+    it('Shouls not return an entry: Token is not provided', (done) => {
+        const entryId3 = 2;
+        const token = '';
+        chai.request(app).get(`/api/v1/entries/${entryId3}`)
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(401);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+    it('Should not return an entry : Invalid params', (done)=>{
+        const entryId2= '1-';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        chai.request(app).get(`/api/v1/entries/${entryId2}`) 
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+    it('Should not return an entry : entry does not belong to you', (done)=>{
+        const entryId5= 2;
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        chai.request(app).get(`/api/v1/entries/${entryId5}`) 
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(401);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+    it('Should return an entry with the specified ID', (done)=>{
+        const entryId =2;
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJTbWl0aCIsImVtYWlsIjoiam9obnNtaXRoQGdtYWlsLmNvbSIsImlhdCI6MTU3MTE4NDg5MiwiZXhwIjoxNTcxNzg5NjkyfQ.dOc2DdKLLfFDEWuu9yRiSupxp9gDghiyqx0c3uq477U';
+        chai.request(app).get(`/api/v1/entries/${entryId}`) 
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body.data).to.be.a('object');
             });
         done();
     });

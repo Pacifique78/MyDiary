@@ -164,6 +164,28 @@ class usersClass{
             data: myEntries
         });
     }
+    getSpecificEntry(req, res){
+        const id = parseInt(req.params.entryId);
+        const entryFound = entries.find(entry=>entry.id === id);
+        if(!entryFound){
+            return res.status(404).json({
+                status:404,
+                error: 'Entry with such id not found'
+            });
+        }
+        else{
+            if(entryFound.createdBy === req.tokenData.email){
+                return res.status(200).json({
+                    status:200,
+                    data: entryFound
+                });
+            }
+            return res.status(401).json({
+                status:401,
+                error: 'This entry does not belong to you'
+            });
+        }
+    }
 }
 const newClass = new usersClass();
 export default newClass;
