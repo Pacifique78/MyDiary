@@ -11,4 +11,7 @@ router.post('/api/v1/auth/signup', checkNewUser, newclass.createUser);
 router.post('/api/v1/auth/signin', checkLoginUser, newclass.login);
 router.post('/api/v1/entries', [checkToken, checkNewEntry], newclass.createEntry);
 router.patch('/api/v1/entries/:entryId', [checkToken, checkNewEntry, validateEntryParams], newclass.modifyEntry);
+router.delete('/api/v1/entries/:entryId', [checkToken, validateEntryParams], newclass.deleteEntry);
+router.get('/api/v1/entries', checkToken, newclass.getEntries);
+router.get('/api/v1/entries/:entryId', [checkToken, validateEntryParams], newclass.getSpecificEntry);
 export default router;

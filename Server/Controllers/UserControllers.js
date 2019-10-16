@@ -124,6 +124,65 @@ class usersClass{
             });
         }
     }
+    deleteEntry(req, res){
+        const id = parseInt(req.params.entryId);
+        const entryFound = entries.find(entry=>entry.id === id);
+        if(!entryFound){
+            return res.status(404).json({
+                status:404,
+                error: 'Entry with such id not found'
+            });
+        }
+        else{
+            if(entryFound.createdBy === req.tokenData.email){
+                entries.splice(entryFound, 1);
+                return res.status(200).json({
+                    status:200,
+                    data: {
+                        message:'Entry successfully deleted'
+                    }
+                });
+            }
+            return res.status(401).json({
+                status:401,
+                error: 'Not yours to delete'
+            });
+        }
+    }
+    getEntries(req, res){
+        const myEntries = [];
+        for(let entry of entries){
+            if(entry.createdBy === req.tokenData.email){
+                myEntries.push(entry);
+            }
+        }
+        return res.status(200).json({
+            status:200,
+            data: myEntries
+        });
+    }
+    getSpecificEntry(req, res){
+        const id = parseInt(req.params.entryId);
+        const entryFound = entries.find(entry=>entry.id === id);
+        if(!entryFound){
+            return res.status(404).json({
+                status:404,
+                error: 'Entry with such id not found'
+            });
+        }
+        else{
+            if(entryFound.createdBy === req.tokenData.email){
+                return res.status(200).json({
+                    status:200,
+                    data: entryFound
+                });
+            }
+            return res.status(401).json({
+                status:401,
+                error: 'This entry does not belong to you'
+            });
+        }
+    }
 }
 const newClass = new usersClass();
 export default newClass;
