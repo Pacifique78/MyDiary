@@ -4,6 +4,7 @@
   "description": "MyDiary is an online journal where users can pen down their thoughts and feelings. ",
   "main": "index.js",
   "scripts": {
+    "start": "babel-node index.js",
     "lint": "eslint ./",
     "test": "nyc --reporter=html --reporter=text mocha --require @babel/register Server/Test/Test.js --exit",
     "dev": "nodemon --exec babel-node index.js",
