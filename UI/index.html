@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MyDiary</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a class="web-Log" href="#"><img src="images/Group 10.png" alt=""></a>
+            <nav>
+                <ul>
+                    <a href="#home-container"><li>HOME</li></a>
+                    <a href="#about-container"><li>ABOUT</li></a>
+                    <a href="#contact-container"><li>CONTACT</li></a>
+                    <a id="login-btn"><li>LOGIN</li></a>
+                </ul>
+            </nav>
+        </div>
+        <div id="home-container">
+            <div class="home-images" style>
+                <h1>Welcome to MyDiary. <span>Pen down your thoughts and feelings. <br><button id="create-account-btn">GET STARTED</button></span></h1>
+            </div>
+            
+        </div>
+        <div id="about-container">
+            <h1>MyDiary is an online journal where users can pen down their thoughts and feelings on a daily basis and keep track of their daily events. </h1>
+            <h2>Tasks you can accomplish with MyDiary:</h2>
+            <div class="task">
+                <div class="tasks"><img src="images/edit+edit+doc+editting+pen+and+paper+tool+write+icon-1320190561740830465.png" alt=""><br> 🖊️ Write daily feelings</div>
+                <div class="tasks"><img src="images/images.png" alt=""><br> 🖊️ Customize your dairy</div>
+                <div class="tasks"><img src="images/privacy.png" alt=""><br> 🖊️ Keep your privacy</div>
+            </div>
+            <div class="task">
+                <div class="tasks"><img src="images/search.png" alt=""><br> 🖊️ Search</div>
+                <div class="tasks"><img src="images/share.jpg" alt=""><br> 🖊️ Share with friends</div>
+                <div class="tasks"><img src="images/delete.jpg" alt=""><br> 🖊️ Delete</div>
+            </div>
+        </div>
+        <div id="contact-container">
+            <form action="">
+                    <input type="text" placeholder="Name" class="input">
+                    <input type="text" placeholder="Email" class="input"><br>
+                    <textarea name="massage" placeholder="Message" class="input message"></textarea>
+            </form>
+        </div>
+        <div class="footer" id="footer">
+                <div class="ComeVistUs">
+                        <i>Come visit us</i>
+                        <ul class="ComeVistUs-element">
+                            <li>KN 78 Kigali, Rwanda</li>
+                            <li>xyz House</li>
+                            <li>2nd floor</li>
+                        </ul>
+                    </div>
+                    <div class="ContactUs" id="ContactUs">
+                            <i>Contact us</i>
+                            <ul class="ContactUs-element">
+                                <li>@mydiary</li>
+                                <li>+250780000000</li>
+                                <li>+250782334455</li>
+                            </ul>
+                    </div>
+                    <div class="FollowUs">
+                            <i>follow us</i>
+                            <ul class="FollowUs-element">
+                                <a href="https://www.google.com/intl/fr/gmail/about/#" target="_blank"><li><img src="images/gmail.jpg" alt="">@mydiary</li></a>
+                                <a href="https://www.instagram.com/" target="_blank"><li><img src="images/instagram.jpg" alt="">mydiary</li></a>
+                                <a href="https://www.facebook.com/" target="_blank"><li><img src="images/facebook.jpg" alt="">mydiary</li></a>
+                            </ul>
+                    </div>
+        </div>
+        <div class="login" id="login">
+            <div class="login-form" id="login-form">
+                <span class="close" id="close-form">&times</span>
+                <form action="">
+                    <input type="text" placeholder="Email">
+                    <input type="password" placeholder="Password">
+                    <button>LOGIN</button>
+                    <a href="">Create account</a>
+                </form>
+            </div>
+        </div>
+        <div class="login" id="create">
+                <div class="create-account" id="create-account">
+                    <span class="close" id="close-create-form">&times</span>
+                    <form action="">
+                        <input type="text" placeholder="First Name">
+                        <input type="text" placeholder="Last Name">
+                        <input type="text" placeholder="Email">
+                        <input type="password" placeholder="Password">
+                        <input type="password" placeholder="Confirm password">
+                        <button>CREATE</button>
+                        <a href="">Already have an account?</a>
+                    </form>
+                </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
