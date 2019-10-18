@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.get('/', (req, res) => {
-    return res.send('WELCOME TO FREE MENTORS');
+    return res.send('WELCOME TO MYDIARY');
 });
 app.use(router);
 const port= process.env.PORT || 6000;
