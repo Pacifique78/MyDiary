@@ -263,6 +263,24 @@
     border-radius: 5px;
     width: 85%;
 }
+#contact-container #submit{
+    width: 100%;
+    text-align: center  ;
+}
+#contact-container button{
+    color: #0179fc;
+    background: #fff;
+    margin: 10px auto;
+    border: unset;
+    border: #fff 1px solid;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+#contact-container button:hover{
+    color: #fff;
+    background: #3796ff;
+}
 .input::placeholder{
     color: #fff;
 }
