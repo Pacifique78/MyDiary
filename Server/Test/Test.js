@@ -124,7 +124,7 @@ describe('Create a new entry', ()=>{
             'title': 'My title',
             'description': 'My description'
         };
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).post('/api/v1/entries')
             .set('Authorization', token)
             .send(testEntry1) 
@@ -139,7 +139,7 @@ describe('Create a new entry', ()=>{
             'title':'My First Program',
             'description':'My description'
         };
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).post('/api/v1/entries') 
             .set('Authorization', token)
             .send(testentry2)
@@ -154,7 +154,7 @@ describe('Create a new entry', ()=>{
             'title':true,
             'description':'hey there'
         };
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).post('/api/v1/entries')
             .set('Authorization', token)
             .send(testEntry4)
@@ -187,7 +187,7 @@ describe('Modify an entry', ()=>{
             'title': 'My First Program',
             'description':'my new diary'
         };
-        const  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).patch(`/api/v1/entries/${entryId}`) 
             .set('Authorization', token)
             .send(testEntry)
@@ -203,7 +203,7 @@ describe('Modify an entry', ()=>{
             'tile':'hello',
             'description':'hey there'
         };
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).patch(`/api/v1/entries/${entryId5}`)
             .set('Authorization', token)
             .send(testEntry5)
@@ -219,7 +219,7 @@ describe('Modify an entry', ()=>{
             'title': 'Le 21 dec 2019',
             'description':'my new diary'
         };
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).patch(`/api/v1/entries/${entryId2}`) 
             .set('Authorization', token)
             .send(testEntry2)
@@ -230,7 +230,7 @@ describe('Modify an entry', ()=>{
             });
     });
     it('Should return an error: entry not yours to modify', (done) => {
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         const entryId3 = 2;
         const testEntry3= {
             'title': 'My First Program',
@@ -267,7 +267,7 @@ describe('Modify an entry', ()=>{
             'title': 'My First Program',
             'description':'my new diary'
         };
-        const  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).patch(`/api/v1/entries/${entryId6}`) 
             .set('Authorization', token)
             .send(testEntry6)
@@ -280,7 +280,7 @@ describe('Modify an entry', ()=>{
 describe('Delete an entry', () => {
     it('Should allow successfully: entry deleted successfully', (done) => {
         const entryId = 1;
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).delete(`/api/v1/entries/${entryId}`)
             .set('Authorization', token)
             .end((err, res) => {
@@ -291,7 +291,7 @@ describe('Delete an entry', () => {
     });
     it('Should Not delete an entry : entry id not found', (done) => {
         const entryId = 100;
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).delete(`/api/v1/entries/${entryId}/`)
             .set('Authorization', token)
             .end((err, res) => {
@@ -302,7 +302,7 @@ describe('Delete an entry', () => {
     });
     it('Should not delete an entry: not yours to delete', (done) => {
         const entries2 = 2;
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).delete(`/api/v1/entries/${entries2}`)
             .set('Authorization', token)
             .end((err, res) => {
@@ -324,7 +324,7 @@ describe('Delete an entry', () => {
     });
     it('Should not delete an entry: Invalid params', (done)=>{
         const entryId5 = '2-';
-        const  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).patch(`/api/v1/entries/${entryId5}`) 
             .set('Authorization', token)
             .end((err, res) => {
@@ -335,7 +335,7 @@ describe('Delete an entry', () => {
 });
 describe('Get all entries', ()=>{
     it('Should should return all entries', (done)=>{
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).get('/api/v1/entries') 
             .set('Authorization', token)
             .end((err, res) => {
@@ -358,7 +358,7 @@ describe('Get all entries', ()=>{
 describe('Get specific entry', ()=>{
     it('Should not return an entry : entryId not found', (done)=>{
         const entryId2= 300;
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).get(`/api/v1/entries/${entryId2}`) 
             .set('Authorization', token)
             .end((err, res) => {
@@ -380,7 +380,7 @@ describe('Get specific entry', ()=>{
     });
     it('Should not return an entry : Invalid params', (done)=>{
         const entryId2= '1-';
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).get(`/api/v1/entries/${entryId2}`) 
             .set('Authorization', token)
             .end((err, res) => {
@@ -391,7 +391,7 @@ describe('Get specific entry', ()=>{
     });
     it('Should not return an entry : entry does not belong to you', (done)=>{
         const entryId5= 2;
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE1NzExNjUzNDAsImV4cCI6MTU3MTc3MDE0MH0.dd-NAk1eByRTrV1fmSTLiSqVSoB4gjJ2fPGPPI2yx_w';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJzeXN0ZW0iLCJsYXN0TmFtZSI6ImFkbWluIiwiZW1haWwiOiJzeXN0ZW1hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjk5OTk5NjUzNDAsImV4cCI6OTk5OTk3MDE0MH0.U5xx8jAhdL2PVkWPbKxvK12IRS---5UW-vQoG2UfeI8';
         chai.request(app).get(`/api/v1/entries/${entryId5}`) 
             .set('Authorization', token)
             .end((err, res) => {
@@ -402,7 +402,7 @@ describe('Get specific entry', ()=>{
     });
     it('Should return an entry with the specified ID', (done)=>{
         const entryId =2;
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJTbWl0aCIsImVtYWlsIjoiam9obnNtaXRoQGdtYWlsLmNvbSIsImlhdCI6MTU3MTE4NDg5MiwiZXhwIjoxNTcxNzg5NjkyfQ.dOc2DdKLLfFDEWuu9yRiSupxp9gDghiyqx0c3uq477U';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJTbWl0aCIsImVtYWlsIjoiam9obnNtaXRoQGdtYWlsLmNvbSIsImlhdCI6MTU3MTE4NDg5MiwiZXhwIjo5OTk5OTg5NjkyfQ.bAm1dqjr_xOdfu8BW314qFiNFvQ91W-PD65o_oqdFCY';
         chai.request(app).get(`/api/v1/entries/${entryId}`) 
             .set('Authorization', token)
             .end((err, res) => {
