@@ -1,191 +1,216 @@
 import bcrypt from 'bcrypt';
-import users from '../Model/userModel';
-import entries from '../Model/entriesModel';
 import jwt from 'jsonwebtoken';
 import moment from 'moment';
-class usersClass{
-    async createUser(req, res){
-        const{email} = req.body;
+import users from '../Model/userModel';
+import entries from '../Model/entriesModel';
+
+class UsersClass {
+    async createUser(req, res) {
+        const { email } = req.body;
         const userFound = users.find(user => user.email === email);
-        if(userFound){
+        if (userFound) {
             res.status(409).json({
                 status: 409,
-                'error': 'user with such email already exists'
+                error: 'user with such email already exists',
             });
-        }
-        else{
-            const {firstName, lastName, email, password} = req.body;
+        } else {
+            const {
+                firstName,
+                lastName,
+                password,
+            } = req.body;
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(password, saltRounds);
-            const newUser = {firstName, lastName, email, hashedPassword};
+            const newUser = {
+                firstName,
+                lastName,
+                email,
+                hashedPassword,
+            };
             users.push(newUser);
             const token = await jwt.sign({
-                firstName, lastName, email
+                firstName, lastName, email,
             }, process.env.secret, {
-                expiresIn: '7d'
+                expiresIn: '7d',
             });
             return res.status(201).json({
-                status:201,
+                status: 201,
                 message: 'User created',
                 data: {
                     firstName,
                     lastName,
-                    email
+                    email,
                 },
-                token
+                token,
             });
         }
     }
-    async login(req, res){
-        const {email, password} = req.body;
+
+    async login(req, res) {
+        const {
+            email,
+            password,
+        } = req.body;
         const userFound = users.find(user => user.email === email);
-        if(userFound){
-            const {firstName, lastName, password:hashedPassword} = userFound;
+        if (userFound) {
+            const {
+                firstName,
+                lastName,
+                password: hashedPassword,
+            } = userFound;
             const compare = await bcrypt.compare(password, hashedPassword);
-            if(compare){
+            if (compare) {
                 const token = await jwt.sign({
-                    firstName, lastName, email
-                }, process.env.secret,{
-                    expiresIn: '7d'}
-                );
+                    firstName, lastName, email,
+                }, process.env.secret, {
+                    expiresIn: '7d',
+                });
                 return res.status(200).json({
                     status: 200,
                     message: 'User logged in successfully',
                     data: {
-                        token
-                    }
+                        token,
+                    },
                 });
             }
             return res.status(401).json({
                 status: 401,
-                error: 'incorrect password'
+                error: 'incorrect password',
             });
         }
         return res.status(404).json({
             status: 404,
-            error: 'Email not found'
+            error: 'Email not found',
         });
     }
-    async createEntry(req, res){
-        const {title, description} = req.body;
+
+    async createEntry(req, res) {
+        const { title, description } = req.body;
         const myEntries = [];
-        for(let entry of entries){
-            if(entry.createdBy === req.tokenData.email){
+        for (const entry of entries) {
+            if (entry.createdBy === req.tokenData.email) {
                 myEntries.push(entry);
             }
         }
-        const entryFound = myEntries.find(myEntrie=>myEntrie.title === title);
-        if(entryFound){
+        const entryFound = myEntries.find(myEntrie => myEntrie.title === title);
+        if (entryFound) {
             return res.status(409).json({
-                status:409,
-                error: 'Entry with such title already exists'
+                status: 409,
+                error: 'Entry with such title already exists',
             });
         }
-        else{
-            const id = entries.length + 1, createdBy = req.tokenData.email, createdOn = moment().format('LLL');
-            const newEntry = {id, createdBy, createdOn, title, description};
-            entries.push(newEntry);
-            return res.status(201).json({
-                status:201,
+        const id = entries.length + 1;
+        const createdBy = req.tokenData.email;
+        const createdOn = moment().format('LLL');
+        const newEntry = {
+            id,
+            createdBy,
+            createdOn,
+            title,
+            description,
+        };
+        entries.push(newEntry);
+        return res.status(201).json({
+            status: 201,
+            data: {
+                id,
+                message: 'Entry created successfully',
+                createdOn,
+                title,
+                description,
+            },
+        });
+    }
+
+    modifyEntry(req, res) {
+        const id = parseInt(req.params.entryId, 10);
+        const {
+            title,
+            description,
+        } = req.body;
+        const entryFound = entries.find(entry => entry.id === id);
+        if (!entryFound) {
+            return res.status(404).json({
+                status: 404,
+                error: 'Entry with such id not found',
+            });
+        }
+        if (entryFound.createdBy === req.tokenData.email) {
+            entryFound.title = title;
+            entryFound.description = description;
+            return res.status(200).json({
+                status: 201,
                 data: {
+                    message: 'Entry successfully edited',
                     id,
-                    message:'Entry created successfully',
-                    createdOn,
                     title,
-                    description
-                }
+                    description,
+                },
             });
         }
+        return res.status(401).json({
+            status: 401,
+            error: 'Not yours to modify',
+        });
     }
-    modifyEntry(req, res){
-        const id = parseInt(req.params.entryId);
-        const {title, description} = req.body;
-        const entryFound = entries.find(entry=>entry.id === id);
-        if(!entryFound){
+
+    deleteEntry(req, res) {
+        const id = parseInt(req.params.entryId, 10);
+        const entryFound = entries.find(entry => entry.id === id);
+        if (!entryFound) {
             return res.status(404).json({
-                status:404,
-                error: 'Entry with such id not found'
+                status: 404,
+                error: 'Entry with such id not found',
             });
         }
-        else{
-            if(entryFound.createdBy === req.tokenData.email){
-                entryFound.title = title;
-                entryFound.description = description;
-                return res.status(200).json({
-                    status:201,
-                    data: {
-                        message:'Entry successfully edited',
-                        id,
-                        title,
-                        description
-                    }
-                });
-            }
-            return res.status(401).json({
-                status:401,
-                error: 'Not yours to modify'
+        if (entryFound.createdBy === req.tokenData.email) {
+            entries.splice(entryFound, 1);
+            return res.status(200).json({
+                status: 200,
+                data: {
+                    message: 'Entry successfully deleted',
+                },
             });
         }
+        return res.status(401).json({
+            status: 401,
+            error: 'Not yours to delete',
+        });
     }
-    deleteEntry(req, res){
-        const id = parseInt(req.params.entryId);
-        const entryFound = entries.find(entry=>entry.id === id);
-        if(!entryFound){
-            return res.status(404).json({
-                status:404,
-                error: 'Entry with such id not found'
-            });
-        }
-        else{
-            if(entryFound.createdBy === req.tokenData.email){
-                entries.splice(entryFound, 1);
-                return res.status(200).json({
-                    status:200,
-                    data: {
-                        message:'Entry successfully deleted'
-                    }
-                });
-            }
-            return res.status(401).json({
-                status:401,
-                error: 'Not yours to delete'
-            });
-        }
-    }
-    getEntries(req, res){
+
+    getEntries(req, res) {
         const myEntries = [];
-        for(let entry of entries){
-            if(entry.createdBy === req.tokenData.email){
+        for (const entry of entries) {
+            if (entry.createdBy === req.tokenData.email) {
                 myEntries.push(entry);
             }
         }
         return res.status(200).json({
-            status:200,
-            data: myEntries
+            status: 200,
+            data: myEntries,
         });
     }
-    getSpecificEntry(req, res){
-        const id = parseInt(req.params.entryId);
-        const entryFound = entries.find(entry=>entry.id === id);
-        if(!entryFound){
+
+    getSpecificEntry(req, res) {
+        const id = parseInt(req.params.entryId, 10);
+        const entryFound = entries.find(entry => entry.id === id);
+        if (!entryFound) {
             return res.status(404).json({
-                status:404,
-                error: 'Entry with such id not found'
+                status: 404,
+                error: 'Entry with such id not found',
             });
         }
-        else{
-            if(entryFound.createdBy === req.tokenData.email){
-                return res.status(200).json({
-                    status:200,
-                    data: entryFound
-                });
-            }
-            return res.status(401).json({
-                status:401,
-                error: 'This entry does not belong to you'
+        if (entryFound.createdBy === req.tokenData.email) {
+            return res.status(200).json({
+                status: 200,
+                data: entryFound,
             });
         }
+        return res.status(401).json({
+            status: 401,
+            error: 'This entry does not belong to you',
+        });
     }
 }
-const newClass = new usersClass();
+const newClass = new UsersClass();
 export default newClass;
