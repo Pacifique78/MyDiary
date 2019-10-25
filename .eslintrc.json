@@ -1,9 +1,15 @@
 {
     "env": {
-        "browser": true,
-        "es6": true
+        "es6": true,
+        "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "airbnb-base"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module"
@@ -23,6 +29,12 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "consistent-return":"off",
+        "class-methods-use-this":"off",
+        "arrow-parens":"off",
+        "max-len":"off",
+        "no-restricted-syntax":"off",
+        "no-useless-catch":"off"
     }
 }

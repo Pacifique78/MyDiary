@@ -1,7 +1,7 @@
-import newclass from '../Controllers/UserControllers';
 import express from 'express';
-import {checkNewUser} from '../middleware/checkNewUser';
-import {checkLoginUser} from '../middleware/checkLoginUser';
+import newclass from '../Controllers/UserControllers';
+import { checkNewUser } from '../middleware/checkNewUser';
+import { checkLoginUser } from '../middleware/checkLoginUser';
 import { checkToken } from '../middleware/checkToken';
 import { checkNewEntry } from '../middleware/checkNewEntry';
 import { validateEntryParams } from '../middleware/checkParams';
