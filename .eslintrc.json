@@ -29,6 +29,12 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "consistent-return":"off",
+        "class-methods-use-this":"off",
+        "arrow-parens":"off",
+        "max-len":"off",
+        "no-restricted-syntax":"off",
+        "no-useless-catch":"off"
     }
 }
