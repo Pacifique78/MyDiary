@@ -35,6 +35,7 @@
         "arrow-parens":"off",
         "max-len":"off",
         "no-restricted-syntax":"off",
-        "no-useless-catch":"off"
+        "no-useless-catch":"off",
+        "no-loop-func":"off"
     }
 }

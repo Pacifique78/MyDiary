@@ -1,12 +1,14 @@
-const findDate = () =>{
-    let mydate = new Date();
-    const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-    document.querySelector('.content-date').textContent = mydate.getDate()+' ' + months[mydate.getMonth()]+' 2019';
+/* eslint-disable func-names */
+/* eslint-disable no-extend-native */
+const findDate = () => {
+    const mydate = new Date();
+    const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+    document.querySelector('.content-date').textContent = `${mydate.getDate()} ${months[mydate.getMonth()]} 2019`;
 };
 findDate();
 const entries = document.getElementsByClassName('entry');
-for(let entry of entries){
-    entry.addEventListener('click', () =>{
+for (const entry of entries) {
+    entry.addEventListener('click', () => {
         document.getElementById('content-box').style.display = 'block';
         document.querySelector('.show-up').style.display = 'none';
         const date = entry.querySelector('.date-div').textContent;
@@ -19,14 +21,14 @@ for(let entry of entries){
 }
 const previous = document.getElementById('previous');
 
-previous.addEventListener('click', () =>{
+previous.addEventListener('click', () => {
     const arr = Array.from(entries);
-    for(let entry of entries){
+    for (const entry of entries) {
         const currentEntryTitle = document.querySelector('.title-input').value;
-        if(currentEntryTitle == entry.querySelector('.title').textContent){
+        if (currentEntryTitle === entry.querySelector('.title').textContent) {
             const index = arr.indexOf(entry);
-            let previousEntry = arr[index-1];
-            if(index == 0){previousEntry = entry;}
+            let previousEntry = arr[index - 1];
+            if (index === 0) { previousEntry = entry; }
             const date = previousEntry.querySelector('.date-div').textContent;
             document.querySelector('.content-date').textContent = date;
             const title = previousEntry.querySelector('.title').textContent;
@@ -40,11 +42,11 @@ previous.addEventListener('click', () =>{
 const next = document.getElementById('next');
 next.addEventListener('click', () => {
     const arr = Array.from(entries);
-    for(let entry1 of entries){
+    for (const entry1 of entries) {
         const currentEntryTitle2 = document.querySelector('.title-input').value;
-        if(currentEntryTitle2 === entry1.querySelector('.title').textContent){
+        if (currentEntryTitle2 === entry1.querySelector('.title').textContent) {
             const index = arr.indexOf(entry1);
-            let nextEntry = arr[index+1];
+            const nextEntry = arr[index + 1];
             const date = nextEntry.querySelector('.date-div').textContent;
             document.querySelector('.content-date').textContent = date;
             const title = nextEntry.querySelector('.title').textContent;
@@ -66,24 +68,24 @@ const done = document.getElementById('done');
 done.addEventListener('click', () => {
     const title = document.querySelector('.title-input').value;
     const message = document.querySelector('textarea').value;
-    const entryFound = Array.from(entries).find(entry => entry.querySelector('.title').textContent == title);
-    if(entryFound){
-        String.prototype.splice = function(idx, rem, str) {
+    const entryFound = Array.from(entries).find(entry => entry.querySelector('.title').textContent === title);
+    if (entryFound) {
+        String.prototype.splice = function (idx, rem, str) {
             return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
         };
-        const slicedMessage = message.splice(60, 0, '<span class="hiden">') + '</span>';
+        const slicedMessage = `${message.splice(60, 0, '<span class="hiden">')}</span>`;
         entryFound.querySelector('.entry-content').innerHTML = slicedMessage;
         document.getElementById('content-box').style.display = 'none';
         document.querySelector('.show-up').style.display = 'block';
     }
-    if(!entryFound){
-        if(title){
-            String.prototype.splice = function(idx, rem, str) {
+    if (!entryFound) {
+        if (title) {
+            String.prototype.splice = function (idx, rem, str) {
                 return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
             };
-            const slicedMessage = message.splice(60, 0, '<span class="hiden">') + '</span>';
+            const slicedMessage = `${message.splice(60, 0, '<span class="hiden">')}</span>`;
             const newDate = document.querySelector('.content-date').innerHTML;
-            const newEntry = '<div class="entry"><div class="date-div">'+ newDate+'<br></div><div class="entry-summary"><span class="title">'+title+'</span><br><span class="entry-content">'+slicedMessage+'</span></div></div>';
+            const newEntry = `<div class="entry"><div class="date-div">${newDate}<br></div><div class="entry-summary"><span class="title">${title}</span><br><span class="entry-content">${slicedMessage}</span></div></div>`;
             document.getElementById('list').innerHTML = document.getElementById('list').innerHTML + newEntry;
             document.getElementById('content-box').style.display = 'none';
             document.querySelector('.show-up').style.display = 'block';
@@ -92,24 +94,24 @@ done.addEventListener('click', () => {
 });
 const inputFile = document.getElementById('input-file');
 const profilePicture = document.getElementById('profile-image');
-profilePicture.addEventListener('click', () =>{
+profilePicture.addEventListener('click', () => {
     inputFile.click();
 });
 inputFile.addEventListener('change', () => {
-    const files = inputFile.files;
-    if(inputFile.value){
-        profilePicture.setAttribute('src', '../images/'+files[0].name);
+    const { files } = inputFile;
+    if (inputFile.value) {
+        profilePicture.setAttribute('src', `../images/${files[0].name}`);
     }
 });
 const deleteEntry = document.getElementById('delete-entry');
 deleteEntry.addEventListener('click', () => {
-    const title =  document.querySelector('.title-input').value;
-    if(title){
+    const title = document.querySelector('.title-input').value;
+    if (title) {
         const arr = Array.from(entries);
-        const entry = arr.find(found => found.querySelector('.title').textContent == title);
-        if(entry){
-            const confirmation = confirm('Do you rearly want to delete this entry???');
-            if(confirmation == true){
+        const entry = arr.find(found => found.querySelector('.title').textContent === title);
+        if (entry) {
+            const confirmation = customConfirm('Do you rearly want to delete this entry???');
+            if (confirmation === true) {
                 entry.remove();
                 document.getElementById('content-box').style.display = 'none';
                 document.querySelector('.show-up').style.display = 'block';
@@ -124,35 +126,30 @@ const notificationNumber = document.getElementById('notification-number');
 const notificationMsg = document.querySelector('.notification-msg');
 notification.addEventListener('click', () => {
     notificationMsg.style.display = 'block';
-}); 
+});
 const more = document.getElementById('more');
 const moreImg = document.getElementById('more-img');
 const moreMsg = document.querySelector('.more-msg');
 more.addEventListener('click', () => {
     moreMsg.style.display = 'block';
-}); 
+});
 document.onclick = (event) => {
-    if(event.target == notification){
+    if (event.target === notification) {
         notificationMsg.style.display = 'block';
         moreMsg.style.display = 'none';
-    }
-    else if(event.target == notificationImg){
+    } else if (event.target === notificationImg) {
         notificationMsg.style.display = 'block';
         moreMsg.style.display = 'none';
-    }
-    else if(event.target == notificationNumber){
+    } else if (event.target === notificationNumber) {
         notificationMsg.style.display = 'block';
         moreMsg.style.display = 'none';
-    }
-    else if(event.target == more){
+    } else if (event.target === more) {
         moreMsg.style.display = 'block';
         notificationMsg.style.display = 'none';
-    }
-    else if(event.target == moreImg){
+    } else if (event.target === moreImg) {
         moreMsg.style.display = 'block';
         notificationMsg.style.display = 'none';
-    }
-    else{
+    } else {
         notificationMsg.style.display = 'none';
         moreMsg.style.display = 'none';
     }

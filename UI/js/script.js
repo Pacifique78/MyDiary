@@ -13,11 +13,11 @@ document.getElementById('close-create-form').addEventListener('click', () => {
     document.getElementById('create').style.display = 'none';
 });
 window.onload = document.getElementById('homeBtn').click();
-let createAccount = document.getElementById('new-account');
-createAccount.addEventListener('click', () =>{ 
+const createAccount = document.getElementById('new-account');
+createAccount.addEventListener('click', () => {
     window.location.assign('html/user-page.html');
 });
-let loginBtn = document.getElementById('login-page-btn');
-loginBtn.addEventListener('click', () =>{ 
+const loginBtn = document.getElementById('login-page-btn');
+loginBtn.addEventListener('click', () => {
     window.location.assign('html/user-page.html');
 });
