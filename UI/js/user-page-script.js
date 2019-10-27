@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-restricted-globals */
 /* eslint-disable func-names */
 /* eslint-disable no-extend-native */
 const findDate = () => {
@@ -93,7 +95,7 @@ done.addEventListener('click', () => {
     }
 });
 const inputFile = document.getElementById('input-file');
-const profilePicture = document.getElementById('profile-image');
+const profilePicture = document.querySelector('.profile-image');
 profilePicture.addEventListener('click', () => {
     inputFile.click();
 });
@@ -110,7 +112,7 @@ deleteEntry.addEventListener('click', () => {
         const arr = Array.from(entries);
         const entry = arr.find(found => found.querySelector('.title').textContent === title);
         if (entry) {
-            const confirmation = customConfirm('Do you rearly want to delete this entry???');
+            const confirmation = confirm('Do you rearly want to delete this entry???');
             if (confirmation === true) {
                 entry.remove();
                 document.getElementById('content-box').style.display = 'none';
@@ -154,3 +156,115 @@ document.onclick = (event) => {
         moreMsg.style.display = 'none';
     }
 };
+document.querySelector('.more-msg').addEventListener('click', () => {
+    document.querySelector('.settings').style.display = 'flex';
+});
+document.getElementById('image').addEventListener('click', () => {
+    document.querySelector('.settings-img').style.display = 'block';
+    document.querySelector('.settings-profile').style.display = 'none';
+    document.querySelector('.settings-settings').style.display = 'none';
+});
+document.getElementById('profile').addEventListener('click', () => {
+    document.querySelector('.settings-profile').style.display = 'block';
+    document.querySelector('.settings-img').style.display = 'none';
+    document.querySelector('.settings-settings').style.display = 'none';
+});
+document.getElementById('settings').addEventListener('click', () => {
+    document.querySelector('.settings-settings').style.display = 'grid';
+    document.querySelector('.settings-profile').style.display = 'none';
+    document.querySelector('.settings-img').style.display = 'none';
+});
+document.getElementById('about-us').addEventListener('click', () => {
+    document.querySelector('.settings-img').style.display = 'block';
+    document.querySelector('.settings-profile').style.display = 'none';
+    document.querySelector('.settings-settings').style.display = 'none';
+});
+document.querySelector('.the-title').addEventListener('click', () => {
+    document.querySelector('.settings-img').style.display = 'block';
+    document.querySelector('.settings-profile').style.display = 'none';
+    document.querySelector('.settings-settings').style.display = 'none';
+});
+document.querySelector('.the-profile').addEventListener('click', () => {
+    document.querySelector('.settings-profile').style.display = 'block';
+    document.querySelector('.settings-img').style.display = 'none';
+    document.querySelector('.settings-settings').style.display = 'none';
+});
+document.querySelector('.the-setting').addEventListener('click', () => {
+    document.querySelector('.settings-settings').style.display = 'grid';
+    document.querySelector('.settings-profile').style.display = 'none';
+    document.querySelector('.settings-img').style.display = 'none';
+});
+document.getElementById('close-form').addEventListener('click', () => {
+    document.querySelector('.settings').style.display = 'none';
+});
+const selectColor = () => {
+    const fontColors = document.getElementById('choose-color');
+    const selectedColor = fontColors.options[fontColors.selectedIndex].value;
+    document.querySelector('.profile-list').style.background = selectedColor;
+    document.querySelector('.content-box').style.background = selectedColor;
+    document.querySelector('.content-date').style.color = selectedColor;
+    document.querySelector('.content-title').style.color = selectedColor;
+    document.querySelector('.title-input').style.color = selectedColor;
+    document.querySelector('#text-area').style.color = selectedColor;
+    document.querySelector('.footer-img').style.background = selectedColor;
+    document.querySelector('.show-up').style.color = selectedColor;
+    document.querySelector('.notification-msg').style.color = selectedColor;
+    document.querySelector('.more-msg').style.color = selectedColor;
+    document.querySelector('.settings-div').style.background = selectedColor;
+    document.querySelector('.close').style.color = selectedColor;
+    document.querySelector('.settings-header').style.color = selectedColor;
+};
+const selectFontFamily = () => {
+    const fontFamilies = document.getElementById('choose-font');
+    const selectedFontFamily = fontFamilies.options[fontFamilies.selectedIndex].value;
+    document.querySelector('.container').style.fontFamily = selectedFontFamily;
+};
+document.getElementById('save-changes').addEventListener('click', () => {
+    selectColor();
+    selectFontFamily();
+});
+const mediaQuery500Px = window.matchMedia('(max-width: 500px)');
+
+if (mediaQuery500Px.matches) {
+    for (const entry of entries) {
+        entry.addEventListener('click', () => {
+            document.getElementById('content-box').style.display = 'block';
+            document.querySelector('.show-up').style.display = 'none';
+            document.querySelector('.profile-list').style.display = 'none';
+            const date = entry.querySelector('.date-div').textContent;
+            document.querySelector('.content-date').textContent = date;
+            const title = entry.querySelector('.title').textContent;
+            document.querySelector('.title-input').value = title;
+            const message = entry.querySelector('.entry-content').textContent;
+            document.querySelector('textarea').value = message;
+        });
+    }
+    done.addEventListener('click', () => {
+        document.querySelector('.profile-list').style.display = 'block';
+        const title = document.querySelector('.title-input').value;
+        const message = document.querySelector('textarea').value;
+        const entryFound = Array.from(entries).find(entry => entry.querySelector('.title').textContent === title);
+        if (entryFound) {
+            String.prototype.splice = function (idx, rem, str) {
+                return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+            };
+            const slicedMessage = `${message.splice(60, 0, '<span class="hiden">')}</span>`;
+            entryFound.querySelector('.entry-content').innerHTML = slicedMessage;
+            document.getElementById('content-box').style.display = 'none';
+            document.querySelector('.show-up').style.display = 'none';
+        }
+        if (!entryFound) {
+            if (title) {
+                String.prototype.splice = function (idx, rem, str) {
+                    return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+                };
+                const slicedMessage = `${message.splice(60, 0, '<span class="hiden">')}</span>`;
+                const newDate = document.querySelector('.content-date').innerHTML;
+                const newEntry = `<div class="entry"><div class="date-div">${newDate}<br></div><div class="entry-summary"><span class="title">${title}</span><br><span class="entry-content">${slicedMessage}</span></div></div>`;
+                document.getElementById('list').innerHTML = document.getElementById('list').innerHTML + newEntry;
+                document.getElementById('content-box').style.display = 'none';
+                document.querySelector('.show-up').style.display = 'none';
+            }
+        }
+    });
+}
