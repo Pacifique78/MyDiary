@@ -8,6 +8,22 @@ const findDate = () => {
     document.querySelector('.content-date').textContent = `${mydate.getDate()} ${months[mydate.getMonth()]} 2019`;
 };
 findDate();
+const printEntry = () => {
+    const myEntries = document.getElementsByClassName('entry');
+    for (const entry of myEntries) {
+        entry.addEventListener('click', () => {
+            document.getElementById('content-box').style.display = 'block';
+            document.querySelector('.show-up').style.display = 'none';
+            const date = entry.querySelector('.date-div').textContent;
+            document.querySelector('.content-date').textContent = date;
+            const title = entry.querySelector('.title').textContent;
+            document.querySelector('.title-input').value = title;
+            const message = entry.querySelector('.entry-content').textContent;
+            document.querySelector('textarea').value = message;
+        });
+    }
+};
+printEntry();
 const entries = document.getElementsByClassName('entry');
 for (const entry of entries) {
     entry.addEventListener('click', () => {
@@ -72,20 +88,20 @@ done.addEventListener('click', () => {
     const message = document.querySelector('textarea').value;
     const entryFound = Array.from(entries).find(entry => entry.querySelector('.title').textContent === title);
     if (entryFound) {
-        String.prototype.splice = function (idx, rem, str) {
-            return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+        String.prototype.convert = function (to, remove, addStr) {
+            return this.slice(0, to) + addStr + this.slice(to + Math.abs(remove));
         };
-        const slicedMessage = `${message.splice(60, 0, '<span class="hiden">')}</span>`;
+        const slicedMessage = `${message.convert(60, 0, '<span class="hiden">')}</span>`;
         entryFound.querySelector('.entry-content').innerHTML = slicedMessage;
         document.getElementById('content-box').style.display = 'none';
         document.querySelector('.show-up').style.display = 'block';
     }
     if (!entryFound) {
         if (title) {
-            String.prototype.splice = function (idx, rem, str) {
-                return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+            String.prototype.convert = function (to, remove, addStr) {
+                return this.slice(0, to) + addStr + this.slice(to + Math.abs(remove));
             };
-            const slicedMessage = `${message.splice(60, 0, '<span class="hiden">')}</span>`;
+            const slicedMessage = `${message.convert(60, 0, '<span class="hiden">')}</span>`;
             const newDate = document.querySelector('.content-date').innerHTML;
             const newEntry = `<div class="entry"><div class="date-div">${newDate}<br></div><div class="entry-summary"><span class="title">${title}</span><br><span class="entry-content">${slicedMessage}</span></div></div>`;
             document.getElementById('list').innerHTML = document.getElementById('list').innerHTML + newEntry;
@@ -93,6 +109,7 @@ done.addEventListener('click', () => {
             document.querySelector('.show-up').style.display = 'block';
         }
     }
+    printEntry();
 });
 const inputFile = document.getElementById('input-file');
 const profilePicture = document.querySelector('.profile-image');
@@ -245,20 +262,20 @@ if (mediaQuery500Px.matches) {
         const message = document.querySelector('textarea').value;
         const entryFound = Array.from(entries).find(entry => entry.querySelector('.title').textContent === title);
         if (entryFound) {
-            String.prototype.splice = function (idx, rem, str) {
-                return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+            String.prototype.convert = function (to, remove, addStr) {
+                return this.slice(0, to) + addStr + this.slice(to + Math.abs(remove));
             };
-            const slicedMessage = `${message.splice(60, 0, '<span class="hiden">')}</span>`;
+            const slicedMessage = `${message.convert(60, 0, '<span class="hiden">')}</span>`;
             entryFound.querySelector('.entry-content').innerHTML = slicedMessage;
             document.getElementById('content-box').style.display = 'none';
             document.querySelector('.show-up').style.display = 'none';
         }
         if (!entryFound) {
             if (title) {
-                String.prototype.splice = function (idx, rem, str) {
-                    return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+                String.prototype.convert = function (to, remove, addStr) {
+                    return this.slice(0, to) + addStr + this.slice(to + Math.abs(remove));
                 };
-                const slicedMessage = `${message.splice(60, 0, '<span class="hiden">')}</span>`;
+                const slicedMessage = `${message.convert(60, 0, '<span class="hiden">')}</span>`;
                 const newDate = document.querySelector('.content-date').innerHTML;
                 const newEntry = `<div class="entry"><div class="date-div">${newDate}<br></div><div class="entry-summary"><span class="title">${title}</span><br><span class="entry-content">${slicedMessage}</span></div></div>`;
                 document.getElementById('list').innerHTML = document.getElementById('list').innerHTML + newEntry;
