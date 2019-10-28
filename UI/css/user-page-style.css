@@ -1,0 +1,455 @@
+*{
+    margin: 0;
+    padding: 0;
+    top:0;
+}
+.container{
+    width: 100%;
+    height: 100%;
+}
+.nav-bar{
+    width: 100%;
+    height: 60px;
+    background-color: #cfd0d2;
+    position: fixed;
+}
+.box{
+    margin-top: 60px;
+    display: flex;
+    height: 100vh;
+}
+.nav-div{
+    display: flex;
+    padding: 10px;
+    margin: 7px;
+}
+.nav-items{
+    height: 60px;
+    display: flex;
+    float: right;
+    align-items: center;
+    margin: auto 5%;
+}
+#logo img{
+    width:120px;
+    height: 60px;
+    margin-left: 8%;
+}
+#add-entry img{
+    height: 15px;
+    width: 15px;
+    
+}
+#delete-entry{
+    cursor: pointer;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+}
+#delete-entry:hover{
+    box-shadow: 1px 2px 10px 2px #0179fc;
+}
+#delete-entry img{
+    height: 22px;
+    width: 18px;
+}
+#notification{
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #fff;
+}
+#notification:hover{
+    box-shadow: 1px 2px 10px 2px #0179fc;
+}
+#notification img{
+    height: 20px;
+}
+#notification span{
+    height: 15px;
+    background: #ff0000;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    top: -6px;
+    right: 8px;
+    font-weight: bold;
+    padding: 2px;
+}
+#more{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff;
+}
+#more:hover{
+    box-shadow: 1px 2px 10px 2px #0179fc;
+}
+#more img{
+    width: 23px;
+    height: 7px;
+}
+.profile-list{
+    width: 30%;
+    height: 100%;
+    background: #0179fc;
+    color: #fff;
+    overflow: scroll;
+}
+.profile{
+    margin-bottom: 50px;
+    text-align: center;
+    border-bottom: 4px solid #fff;
+    font-weight: bold;
+}
+.profile img{
+    border-radius: 50%;
+    padding: 5%;
+}
+.entry{
+    width: 90%;
+    height: 70px;
+    border-radius: 5px;
+    border: #fff solid 2px;
+    margin: 20px auto;
+    box-sizing: border-box;
+    display: flex;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px 2px #fff;
+    overflow: hidden;
+}
+.entry:hover{
+    box-shadow:  3px 3px 5px 5px #fff;
+}
+.date-div {
+    width: 80px;
+    border-right: #fff solid;
+    margin-right: 10px;
+    text-align: center;
+    padding: 6px 0;
+}
+.entry-summary .title{
+    font-weight: bolder;
+    font-size: 21px;
+}
+.entry-summary .entry-content .hiden{
+    display: none;
+}
+.content{
+    height: 100vh;
+    width: 100vw;
+    color: #fff;
+}
+.content-box {
+    width: 90%;
+    height: 75%;
+    background-color: #0179fc;
+    margin: 78px auto;
+    box-shadow: 10px 10px 10px 10px #cfd0d2;
+    display: none;
+}
+.content-date {
+    width: 50px;
+    height: 75px;
+    padding: 20px;
+    border: #fff solid 2px;
+    font-weight: bold;
+    text-align: center;
+    background: #cfd0d2;
+    color: #0179fc;
+    font-size: 25px;
+    box-shadow: 3px 3px 10px 5px #fff;
+    margin: 10px;
+    border-radius: 5px;
+}
+.content-headers{
+    display: flex;
+    height: 150px;
+    align-items: center;
+}
+.content-title{
+    margin-left: 5%;
+    font-size: 25px;
+    background-color: #cfd0d2;
+    color: #0179fc;
+    border-radius: 5px;
+    border: #fff solid 2px;
+    font-weight: bold;
+}
+.title-input{
+    margin-left: 1%;
+    font-size: 25px;
+    background-color: #cfd0d2;
+    border-radius: 5px;
+    border: #fff solid 2px;
+    width: 50%;
+    font-weight: bold;
+    color: #0179fc;
+}
+.content-message{
+    height: 75%;
+    text-align: center;
+}
+.content-message textarea{
+    color: #0179fc;
+    width: 80%;
+    height: 80%;
+    font-size: 20px;
+    padding: 10px;
+}
+.allows img{
+    bottom: 0;
+}
+.allows #next{
+    transform: rotate(180deg);
+}
+.allows .margin{
+    margin-left: 10px;
+}
+.done{
+    margin-left: 80%;
+}
+.footer-img{
+    position: sticky;
+    display: flex;
+    background-color: #0179fc;
+}
+.footer-img button{
+    background-color: unset;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.footer-img button:hover{
+    box-shadow: 3px 3px 10px 5px #fff;
+}
+.show-up{
+    color: #0179fc;
+}
+.show-up-words{
+    margin: 20% 35%;
+    width: 30%;
+    background: #cfd0d2;
+    border-radius: 10px;
+    text-align: center;
+    padding: 1%;
+}
+#add-entry img{
+    height: 15px;
+    width: 15px;
+    margin: 35%;
+}
+#add-entry{
+    float: right;
+    margin: 0 50px;
+    height: 50px;
+    width: 50px;
+    background: #cfd0d2;
+    border-radius: 50%;
+    box-shadow: 1px 2px 10px 2px #0179fc;
+    cursor: pointer;
+}
+@media (max-width: 1050px){
+    .profile-list{
+        width: 50%
+    }
+    .footer-img{
+        display: -webkit-box;
+    }
+    .done{
+        margin-left: 55%;
+    }
+    .profile img{
+        width: 150px;
+    }
+    .show-up-words {
+        margin: 30% 20%;
+        width: 60%;
+    }
+}
+@media (max-width: 500px){
+    #logo img{
+        width:120px;
+        height: 60px;
+        margin-left: 0;
+    }
+    .show-up{
+        display: none;
+    }
+    .profile-list{
+        width: 100000%;
+    }
+}
+.notification-msg{
+    display: block;
+    color: #0179fc;
+    float: right;
+    margin-top: 5px;
+    border-radius: 5px;
+    width: 150px;
+    margin-right: 7%;
+    background: #cfd0d2;
+    text-align: center;
+    z-index: 10;
+    display: none;
+}
+.the-title{
+    font-size: 30px;
+    font-weight: bold;
+    justify-content: center;
+}
+.notification-msg span{
+    display: flex;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.notification-msg span:hover{
+    background: #e5e5e6;
+}
+.notification-msg span .asterisk{
+    padding-left: 10px;
+    font-size: 25px;    
+}
+.more-msg{
+    display: block;
+    color: #0179fc;
+    float: right;
+    margin-top: 5px;
+    border-radius: 5px;
+    width: 150px;
+    margin-right: 2%;
+    background: #cfd0d2;
+    z-index: 10;
+    display: none;
+}
+.more-msg span{
+    display: flex;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 2px 5px;
+    align-items: center;
+    font-size: 20px;
+}
+.more-msg span:hover{
+    background: #e5e5e6;
+}
+.more-msg a{
+    text-decoration: none;
+    color: #0179fc;
+}
+.settings{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+}
+.settings-div{
+    width: 50%;
+    height: 400px;
+    background-color: #0179fc;
+    color: #fff;
+    position: relative;
+    text-align: center;
+    margin: 15% auto;
+}
+.close{
+    top: 0;
+    right: 2%;
+    position: absolute;
+    font-size: 40px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #0179fc;
+}
+.close:hover{
+    color:#f00;
+}
+.settings{
+    display: flex;
+    display: none;
+}
+.settings .settings-header{
+    float: left;
+    background: #fff;
+    color: #0179fc;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+}
+.settings .settings-header img{
+    padding: 0 10px;
+}
+.settings .settings-box{
+    display: flex;
+    width: 100%;
+    height: 80%;
+}
+.settings .settings-list{
+    width:20%;
+    display: grid;
+    float: left;
+    height: 0%;
+}
+.settings .settings-list img{
+    height: 65px;
+    cursor: pointer;
+    padding: 10px 0;
+    margin: 5px;
+    border-radius: 15px;
+}
+.settings .settings-list span{
+    padding: 10px 0;
+    border-radius: 10px;
+    margin: 5px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.settings-content{
+    float: right;
+}
+.settings .settings-list span:hover{
+    background: #7f7f7f;
+}
+.settings .settings-content .settings-img{
+    margin: 10% 5%;
+}
+.settings .settings-content .settings-profile{   
+    width: 200%;
+    justify-content: center;
+    display: none;
+}
+.settings .settings-content .settings-settings{
+    width: 100%;
+    margin: 30% 50%;
+    display: grid;
+    display: none;
+}
+.settings .settings-content .settings-settings select{
+    padding: 0 10px;
+    margin-left: 10px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #0179fc;
+    font-weight: bold;
+}
+.settings .settings-content #save-changes{
+    width: 150px;
+    margin: 30px auto;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: #209e00;
+    cursor: pointer;
+}
