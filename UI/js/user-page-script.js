@@ -176,40 +176,25 @@ document.onclick = (event) => {
 document.querySelector('.more-msg').addEventListener('click', () => {
     document.querySelector('.settings').style.display = 'flex';
 });
-document.getElementById('image').addEventListener('click', () => {
-    document.querySelector('.settings-img').style.display = 'block';
-    document.querySelector('.settings-profile').style.display = 'none';
-    document.querySelector('.settings-settings').style.display = 'none';
-});
 document.getElementById('profile').addEventListener('click', () => {
     document.querySelector('.settings-profile').style.display = 'block';
-    document.querySelector('.settings-img').style.display = 'none';
     document.querySelector('.settings-settings').style.display = 'none';
 });
 document.getElementById('settings').addEventListener('click', () => {
     document.querySelector('.settings-settings').style.display = 'grid';
     document.querySelector('.settings-profile').style.display = 'none';
-    document.querySelector('.settings-img').style.display = 'none';
-});
-document.getElementById('about-us').addEventListener('click', () => {
-    document.querySelector('.settings-img').style.display = 'block';
-    document.querySelector('.settings-profile').style.display = 'none';
-    document.querySelector('.settings-settings').style.display = 'none';
 });
 document.querySelector('.the-title').addEventListener('click', () => {
-    document.querySelector('.settings-img').style.display = 'block';
     document.querySelector('.settings-profile').style.display = 'none';
     document.querySelector('.settings-settings').style.display = 'none';
 });
 document.querySelector('.the-profile').addEventListener('click', () => {
     document.querySelector('.settings-profile').style.display = 'block';
-    document.querySelector('.settings-img').style.display = 'none';
     document.querySelector('.settings-settings').style.display = 'none';
 });
 document.querySelector('.the-setting').addEventListener('click', () => {
     document.querySelector('.settings-settings').style.display = 'grid';
     document.querySelector('.settings-profile').style.display = 'none';
-    document.querySelector('.settings-img').style.display = 'none';
 });
 document.getElementById('close-form').addEventListener('click', () => {
     document.querySelector('.settings').style.display = 'none';
@@ -222,7 +207,6 @@ const selectColor = () => {
     document.querySelector('.content-date').style.color = selectedColor;
     document.querySelector('.content-title').style.color = selectedColor;
     document.querySelector('.title-input').style.color = selectedColor;
-    document.querySelector('#text-area').style.color = selectedColor;
     document.querySelector('.footer-img').style.background = selectedColor;
     document.querySelector('.show-up').style.color = selectedColor;
     document.querySelector('.notification-msg').style.color = selectedColor;
