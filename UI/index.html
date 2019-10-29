@@ -10,10 +10,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <a class="web-Log" href="#"><img src="images/Group 10.png" alt=""></a>
+            <a class="web-Log" href="./index.html"><img src="images/Group 10.png" alt=""></a>
             <nav>
                 <ul>
-                    <a href="#home-container" id="homeBtn"><li>HOME</li></a>
                     <a href="#about-container"><li>ABOUT</li></a>
                     <a href="#contact-container"><li>CONTACT</li></a>
                     <a id="login-btn"><li>LOGIN</li></a>
@@ -43,7 +42,7 @@
         <div id="contact-container">
             <form action="">
                     <input type="text" placeholder="Name" class="input">
-                    <input type="text" placeholder="Email" class="input"><br>
+                    <input type="text" placeholder="Email" class="input" type="email"><br>
                     <textarea name="massage" placeholder="Message" class="input message"></textarea>
             </form>
             <div id="submit"><button>Submit</button></div>
@@ -74,28 +73,28 @@
                             </ul>
                     </div>
         </div>
-        <div class="login" id="login">
+        <div id="login">
             <div class="login-form" id="login-form">
                 <span class="close" id="close-form">&times</span>
-                <form action="">
-                    <input type="text" placeholder="Email">
-                    <input type="password" placeholder="Password">
+                <form class = sbt-login>
+                    <input type="text" placeholder="Email" type="email" required>
+                    <input type="password" placeholder="Password" required>
                     <button id="login-page-btn">LOGIN</button>
-                    <a href="">Create account</a>
+                    <span id="create-account-login">Create account</span>
                 </form>
             </div>
         </div>
-        <div class="login" id="create">
+        <div id="create">
                 <div class="create-account" id="create-account">
                     <span class="close" id="close-create-form">&times</span>
-                    <form action="">
-                        <input type="text" placeholder="First Name">
-                        <input type="text" placeholder="Last Name">
-                        <input type="text" placeholder="Email">
-                        <input type="password" placeholder="Password">
-                        <input type="password" placeholder="Confirm password">
-                        <button id="new-account">CREATE</button>
-                        <a href="">Already have an account?</a>
+                    <form class="sbt-create">
+                        <input type="text" placeholder="First Name" required>
+                        <input type="text" placeholder="Last Name" required>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <input type="password" placeholder="Confirm password" required>
+                        <button id="new-account-btn">CREATE</button>
+                        <span id="have-account">Already have an account?</span>
                     </form>
                 </div>
         </div>
