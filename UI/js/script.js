@@ -14,11 +14,11 @@ document.getElementById('close-create-form').addEventListener('click', () => {
 });
 const createAccount = document.getElementById('new-account-btn');
 createAccount.addEventListener('click', () => {
-    window.location.assign('html/user-page.html');
+    window.location.href = 'html/user-page.html';
 });
 const loginBtn = document.getElementById('login-page-btn');
 loginBtn.addEventListener('click', () => {
-    window.location.assign('html/user-page.html');
+    window.location.href = 'html/user-page.html';
 });
 document.getElementById('have-account').addEventListener('click', () => {
     document.getElementById('create-account').style.display = 'none';
