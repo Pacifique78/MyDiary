@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.get('/', (req, res) => res.send('WELCOME TO MY DIARY'));
+app.get('/', (req, res) => res.status(200).json({ message: 'WELCOME TO MY DIARY' }));
 app.use(userRoutes);
 app.use(entryRoutes);
 const port = process.env.PORT || 6000;
