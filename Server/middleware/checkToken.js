@@ -3,15 +3,16 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 export const checkToken = (req, res, next) => {
-    const token = req.headers.authorization;
-    if (!token) {
+    try {
+        const { authorization } = req.headers;
+        const verified = jwt.verify(authorization, process.env.secret);
+        req.tokenData = verified;
+        next();
+    } catch (error) {
         return res.status(401).json({
             status: 401,
             error: 'Token not provided',
         });
     }
-    const verified = jwt.verify(token, process.env.secret);
-    req.tokenData = verified;
-    next();
 };
 export default checkToken;

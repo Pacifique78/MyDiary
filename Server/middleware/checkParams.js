@@ -1,21 +1,11 @@
 import Joi from 'joi';
+import validationHelper from '../helpers/validationHelper';
 
 export const validateEntryParams = (req, res, next) => {
     const entryValidationParams = {
-        entryId: Joi.number().required(),
+        entryId: Joi.number().positive().required(),
     };
-    const schemaValidation = Joi.validate(req.params, entryValidationParams);
-    if (schemaValidation.error) {
-        const validationErrors = [];
-        for (let i = 0; i < schemaValidation.error.details.length; i += 1) {
-            // eslint-disable-next-line quotes
-            validationErrors.push(schemaValidation.error.details[i].message.split('"').join(" "));
-        }
-        return res.status(400).json({
-            status: 400,
-            error: validationErrors[0],
-        });
-    }
-    next();
+    const schemasValidation = Joi.validate(req.params, entryValidationParams);
+    validationHelper(res, schemasValidation, next);
 };
 export default validateEntryParams;
