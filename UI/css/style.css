@@ -12,50 +12,6 @@
     position: fixed;
     top:0;
 }
-@media screen and (max-width: 768px){
-    .header{
-        padding: 0% 15%;
-        position: fixed;
-        top:0;
-    }
-    #home-container .home-images h1 {
-        width: 80%;
-    }
-    
-}
-@media screen and (max-width: 628px){
-    .header{
-        padding: 0% 10%;
-        position: fixed;
-        top:0;
-    }
-}
-@media (max-width: 420px){
-    .header nav ul a {
-        padding: 18px 3px;
-    }
-    .header{
-        padding: 0% 1%;
-        position: fixed;
-        top:0;
-    }
-    #home-container .home-images h1 {
-        width: 80%;
-    }
-    #ContactUs {
-        margin-left: 2vw;
-        width: 30%;
-        line-height: 25px;
-    }
-    .container #footer {
-        bottom: 0;
-        min-height: 160px;
-        display: flex;
-        flex-direction: row;
-        color: #0179fc;
-        margin: 0 0%;
-    }
-}
 .header nav{
     max-height: 85px;
     display: flex;
@@ -79,10 +35,14 @@
 }
 .header ul a{
     float: left;
-    padding: 18px 16px;
+    padding: 5px 10px;
     list-style: none;
     color: #0179fc; 
     text-decoration: none;
+}
+.header ul li{
+    padding: 4px 10px;
+    text-align: center;
 }
 .header ul li:hover{
     color: #fff; 
@@ -110,12 +70,12 @@
     background-color: unset;
     padding: 0.2% 2%;
     margin: 3%;
-    border: #fff solid;
+    border: #0179fc solid;
     color: #0179fc;
 }
 #home-container button:hover{
     background-color: #0179fc;
-    border: black solid;
+    border: #fff solid;
     color: #fff;
     font-weight: 100;
 }
@@ -128,7 +88,7 @@
 #about-container h2{
     padding: 5%;
 }
-.login{
+#login{
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -139,13 +99,13 @@
     display: none;
 }
 .login-form{
-    width: 30%;
-    height: 200px;
+    
+    width: 40%;
+    height: 250px;
     background-color: #0179fc;
-    color: #fff;
-    position: relative;
+    color: #fff; 
     text-align: center;
-    display: none;
+    transform: translate(0%, -35%);
 }
 .login-form input{
     width: 50%;
@@ -155,26 +115,53 @@
     border-bottom: 2px solid #fff;
     border-radius: 5px;
     padding: 1%;
-    font-size: 14px;
+    font-size: 18px;
     background-color: unset;
     color: #fff;
 }
 .login-form input::placeholder{
     color: #fff;
 }
-.login form button:hover{
+#login form button:hover{
     background-color: #fff;
     color: #0179fc;
 }
+#login form{
+    margin: 50px -20%;
+    width: 140%;
+}
+#login form button{
+    background-color: unset;
+    color: #fff;
+    padding: 1% 2%;
+    font-size: 80%;
+    border-radius: 5px;
+    border: #fff solid;
+    margin-top: 3%;
+    cursor: pointer;
+}
+#login form span{
+    color: #fff;
+    margin-left: 5%;
+    cursor: pointer;
+}
+#create{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top:0;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
 .create-account{
-    width: 30%;
-    height: 300px;
-    padding-top: 20px;
+    width: 50%;
+    height: 450px;
     background-color: #0179fc;
     color: #fff;
-    position: relative;
     text-align: center;
-    transform: translate(5%, 20%);
+    transform: translate(0%, -9%);
     display: none;
 }
 .close{
@@ -196,17 +183,18 @@
     border-bottom: 2px solid #fff;
     border-radius: 5px;
     padding: 1%;
-    font-size: 14px;
+    font-size: 18px;
     background-color: unset;
     color: #fff;
 }
 .create-account input::placeholder{
     color: #fff;
 }
-.login form{
-    margin: 50px auto;
+#create form{
+    margin: 50px -20%;
+    width: 140%;
 }
-.login form button{
+#create form button{
     background-color: unset;
     color: #fff;
     padding: 1% 2%;
@@ -216,10 +204,10 @@
     margin-top: 3%;
     cursor: pointer;
 }
-.login form a{
-    text-decoration: none;
+#create form span{
     color: #fff;
     margin-left: 5%;
+    cursor: pointer;
 }
 .task{
     display: flex;
@@ -333,4 +321,60 @@
 .ComeVistUs i, .ContactUs i , .FollowUs i{
     font-weight:bold;
     font-size: 19px;
+}
+@media screen and (max-width: 768px){
+    .header{
+        padding: 0% 15%;
+        position: fixed;
+        top:0;
+    }
+    #home-container .home-images h1 {
+        width: 80%;
+    }
+    
+}
+@media screen and (max-width: 628px){
+    .header{
+        padding: 0% 10%;
+        position: fixed;
+        top:0;
+    }
+    .create-account{
+        width: 90%;
+    }
+    .login-form{
+        width:90%
+    }
+}
+@media (max-width: 420px){
+    .header nav ul a {
+        padding: 18px 0;
+    }
+    .header{
+        padding: 0% 1%;
+        position: fixed;
+        top:0;
+    }
+    #home-container .home-images h1 {
+        width: 80%;
+    }
+    #ContactUs {
+        margin-left: 2vw;
+        width: 30%;
+        line-height: 25px;
+    }
+    .container #footer {
+        bottom: 0;
+        min-height: 160px;
+        display: flex;
+        flex-direction: row;
+        color: #0179fc;
+        margin: 0 0%;
+    }
+    #create-account{
+        width: 90%;
+    }
+    #login-form{
+        width:90%
+    }
 }

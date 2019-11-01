@@ -12,7 +12,6 @@
         <div class="nav-bar">
             <a id="logo" href="../index.html"><img src="../images/Group 10.png" alt=""></a>
             <div class="nav-items">
-                <div class="nav-div" id="delete-entry"><img src="../images/delete-icon2.png" ></div>
                 <div>
                     <div class="nav-div" id="notification">
                         <img src="../images/bell-icon2.png" id="notification-img"><span id="notification-number">1</span>
@@ -82,12 +81,16 @@
                 <div class="content-message"><textarea id="text-area" placeholder="Type here" value=""></textarea></div> 
                 <div class="footer-img">
                     <div class="allows"><button class="margin" title="previous" id="previous"><img src="../images/Group 16.png"></button><button class="margin" title="next" id="next"><img src="../images/Group 16.png"></button></div>
-                    <div class="done" ><button title="Done!" id="done"><img src="../images/tick.png" alt=""></button></div>
+                    <div id="delete-entry"><button title="Delete">DELETE</button></div>
+                    <div class="done" ><button title="Done!" id="done">DONE</button></div>
                 </div>
             </div>
             <div class="show-up">
-                <div class="show-up-words"><h1>Pen down your thoughts and feelings...🖊️</h1></div>
-                <div id="add-entry"><img src="../images/Group 12.png" ></div>
+                <div class="show-up-words">
+                    <h1>Pen down your thoughts and feelings...🖊️
+                        <div id="add-entry"><img src="../images/Group 12.png" ></div>
+                    </h1>
+                </div>
             </div>
         </div>
         </div>
@@ -97,15 +100,11 @@
                 <span class="close" id="close-form">&times</span>
                 <div class="settings-box">
                     <div class="settings-list">
-                        <img src="../images/Group 10.png" id="image">
+                        <a href="../index.html"><img src="../images/Group 10.png" id="image"></a>
                         <span id="profile">Profile</span>
                         <span id="settings">Settings</span>
-                        <span id="about-us">AboutUs</span>
                     </div>
                     <div class="settings-content">
-                        <div class="settings-img">
-                                <h3>MyDiary is an online journal where users can pen down their thoughts and feelings on a daily basis and keep track of their daily events. </h1>
-                        </div>
                         <div class="settings-profile">
                             <div class="profile">
                                 <input type="file" accept="image/*" id="input-file" hidden="hidden"><img src="../images/profile-template.jpg" alt="" id="profile-image"><br>
