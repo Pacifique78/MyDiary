@@ -51,7 +51,7 @@ class EntryClass {
 
     async deleteEntry(req, res) {
         const id = parseInt(req.params.entryId, 10);
-        const entryFound = await entries.find(entry => entry.id === id && checkOwner(req, entry.id));
+        const entryFound = await entries.find(entry => entry.id === id && checkOwner(req, entry.createdBy));
         if (entryFound) {
             entries.splice(entryFound, 1);
             return res.status(200).json({
