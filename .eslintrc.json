@@ -35,6 +35,11 @@
         "arrow-parens":"off",
         "max-len":"off",
         "no-restricted-syntax":"off",
-        "no-useless-catch":"off"
+        "no-useless-catch":"off",
+        "no-loop-func":"off",
+        "no-alert":"off",
+        "no-restricted-globals":"off",
+        "func-names":"off",
+        "no-extend-native":"off"
     }
 }
