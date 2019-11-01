@@ -20,6 +20,11 @@ const testUsers = [{
 }, {
     email: 'testUser@gmail.com',
     // password: 'password',
+}, {
+    firstName: 'testUser2',
+    lastName: 'testUser2',
+    email: 'testUser2@gmail.com',
+    password: 'password',
 },
 ];
 export default testUsers;

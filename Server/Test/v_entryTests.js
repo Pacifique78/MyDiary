@@ -1,15 +1,17 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import { describe, it } from 'mocha';
+import dotenv from 'dotenv';
 import app from '../../index';
 import testEntry from '../Model/mockData/testEntry';
 
+dotenv.config();
 const { expect } = chai;
 chai.use(chaiHttp);
 describe('Create a new entry', () => {
     it('Should return a success: new entry created', (done) => {
         chai.request(app).post('/api/v1/entries')
-            .set('Authorization', testEntry[6].token)
+            .set('Authorization', process.env.userToken1)
             .send(testEntry[0])
             .end((err, res) => {
                 expect(res).to.have.status(201);
@@ -18,9 +20,31 @@ describe('Create a new entry', () => {
             });
         done();
     });
+    it('Should return a success: second entry created', (done) => {
+        chai.request(app).post('/api/v1/entries')
+            .set('Authorization', process.env.userToken2)
+            .send(testEntry[0])
+            .end((err, res) => {
+                expect(res).to.have.status(201);
+                expect(res.body.data).to.be.a('object');
+                expect(res.body.data.message).to.equal('Entry created successfully');
+            });
+        done();
+    });
+    it('Should return an error: unauthorized access', (done) => {
+        chai.request(app).post('/api/v1/entries')
+            .set('Authorization', process.env.falseToken)
+            .send(testEntry[1])
+            .end((err, res) => {
+                expect(res).to.have.status(403);
+                expect(res.body).to.have.property('error');
+                expect(res.body.error).to.equal('You are not authorized to perform this task');
+            });
+        done();
+    });
     it('Should return an error: Invalid data', (done) => {
         chai.request(app).post('/api/v1/entries')
-            .set('Authorization', testEntry[6].token)
+            .set('Authorization', process.env.userToken1)
             .send(testEntry[1])
             .end((err, res) => {
                 expect(res).to.have.status(400);
@@ -31,7 +55,7 @@ describe('Create a new entry', () => {
     });
     it('Should return an error: Token is not provided', (done) => {
         chai.request(app).post('/api/v1/entries')
-            .set('Authorization', testEntry[8].token)
+            .set('Authorization', '')
             .send(testEntry[0])
             .end((err, res) => {
                 expect(res).to.have.status(401);
@@ -40,11 +64,21 @@ describe('Create a new entry', () => {
             });
         done();
     });
+    it('Should return an error: Bad token', (done) => {
+        chai.request(app).post('/api/v1/entries')
+            .set('Authorization', process.env.falseToken2)
+            .send(testEntry[0])
+            .end((err, res) => {
+                expect(res).to.have.status(401);
+                expect(res.body).to.have.property('error');
+            });
+        done();
+    });
 });
 describe('Modify an entry', () => {
     it('Should return a success: entry successfully edited', (done) => {
         chai.request(app).patch(`/api/v1/entries/${testEntry[3].entryId}`)
-            .set('Authorization', testEntry[6].token)
+            .set('Authorization', process.env.userToken1)
             .send(testEntry[0])
             .end((err, res) => {
                 expect(res).to.have.status(200);
@@ -56,7 +90,7 @@ describe('Modify an entry', () => {
     });
     it('Should return an error: Invalid data', (done) => {
         chai.request(app).patch(`/api/v1/entries/${testEntry[3]}`)
-            .set('Authorization', testEntry[6].token)
+            .set('Authorization', process.env.userToken1)
             .send(testEntry[1])
             .end((err, res) => {
                 expect(res).to.have.status(400);
@@ -65,9 +99,31 @@ describe('Modify an entry', () => {
             });
         done();
     });
-    it('Should return an error: entry not found', (done) => {
+    it('Should return an error: unauthorized access', (done) => {
         chai.request(app).patch(`/api/v1/entries/${testEntry[3].entryId}`)
-            .set('Authorization', testEntry[7].token)
+            .set('Authorization', process.env.falseToken)
+            .send(testEntry[1])
+            .end((err, res) => {
+                expect(res).to.have.status(403);
+                expect(res.body).to.have.property('error');
+                expect(res.body.error).to.equal('You are not authorized to perform this task');
+            });
+        done();
+    });
+    it('Should return an error: entry not found', (done) => {
+        chai.request(app).patch(`/api/v1/entries/${testEntry[5].entryId}`)
+            .set('Authorization', process.env.userToken1)
+            .send(testEntry[2])
+            .end((err, res) => {
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.property('error');
+                expect(res.body.error).to.equal('Entry not found');
+                done();
+            });
+    });
+    it('Should return an error: this entry is not yours', (done) => {
+        chai.request(app).patch(`/api/v1/entries/${testEntry[3].entryId}`)
+            .set('Authorization', process.env.userToken2)
             .send(testEntry[2])
             .end((err, res) => {
                 expect(res).to.have.status(404);
@@ -78,7 +134,7 @@ describe('Modify an entry', () => {
     });
     it('Shouls return an error: Token is not provided', (done) => {
         chai.request(app).patch(`/api/v1/entries/${testEntry[3].entryId}`)
-            .set('Authorization', testEntry[8].token)
+            .set('Authorization', '')
             .send(testEntry[0])
             .end((err, res) => {
                 expect(res).to.have.status(401);
@@ -89,7 +145,7 @@ describe('Modify an entry', () => {
     });
     it('Should not return a success: Invalid params', (done) => {
         chai.request(app).patch(`/api/v1/entries/${testEntry[4].entryId}`)
-            .set('Authorization', testEntry[6].token)
+            .set('Authorization', process.env.userToken1)
             .send(testEntry[0])
             .end((err, res) => {
                 expect(res).to.have.status(400);
@@ -102,7 +158,7 @@ describe('Modify an entry', () => {
 describe('Get all entries', () => {
     it('Should should return all entries', (done) => {
         chai.request(app).get('/api/v1/entries')
-            .set('Authorization', testEntry[6].token)
+            .set('Authorization', process.env.userToken1)
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body).to.have.property('data');
@@ -113,7 +169,7 @@ describe('Get all entries', () => {
     });
     it('Shouls not return all entries: Token is not provided', (done) => {
         chai.request(app).get('/api/v1/entries')
-            .set('Authorization', testEntry[8].token)
+            .set('Authorization', '')
             .end((err, res) => {
                 expect(res).to.have.status(401);
                 expect(res.body).to.have.property('error');
@@ -121,11 +177,21 @@ describe('Get all entries', () => {
             });
         done();
     });
+    it('Should return an error: unauthorized access', (done) => {
+        chai.request(app).get('/api/v1/entries')
+            .set('Authorization', process.env.falseToken)
+            .end((err, res) => {
+                expect(res).to.have.status(403);
+                expect(res.body).to.have.property('error');
+                expect(res.body.error).to.equal('You are not authorized to perform this task');
+            });
+        done();
+    });
 });
 describe('Get specific entry', () => {
     it('Should not return an entry : entryId not found', (done) => {
         chai.request(app).get(`/api/v1/entries/${testEntry[5].entryId}`)
-            .set('Authorization', testEntry[6].token)
+            .set('Authorization', process.env.userToken1)
             .end((err, res) => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.property('error');
@@ -135,7 +201,7 @@ describe('Get specific entry', () => {
     });
     it('Shouls not return an entry: Token is not provided', (done) => {
         chai.request(app).get(`/api/v1/entries/${testEntry[3].entryId}`)
-            .set('Authorization', testEntry[8].token)
+            .set('Authorization', '')
             .end((err, res) => {
                 expect(res).to.have.status(401);
                 expect(res.body).to.have.property('error');
@@ -145,7 +211,7 @@ describe('Get specific entry', () => {
     });
     it('Should not return an entry : Invalid params', (done) => {
         chai.request(app).get(`/api/v1/entries/${testEntry[4].entryId}`)
-            .set('Authorization', testEntry[6].token)
+            .set('Authorization', process.env.userToken1)
             .end((err, res) => {
                 expect(res).to.have.status(400);
                 expect(res.body).to.have.property('error');
@@ -155,7 +221,7 @@ describe('Get specific entry', () => {
     });
     it('Should return an entry with the specified ID', (done) => {
         chai.request(app).get(`/api/v1/entries/${testEntry[3].entryId}`)
-            .set('Authorization', testEntry[6].token)
+            .set('Authorization', process.env.userToken1)
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body.data).to.be.a('object');
@@ -165,11 +231,21 @@ describe('Get specific entry', () => {
             });
         done();
     });
+    it('Should return an error: unauthorized access', (done) => {
+        chai.request(app).get(`/api/v1/entries/${testEntry[3].entryId}`)
+            .set('Authorization', process.env.falseToken)
+            .end((err, res) => {
+                expect(res).to.have.status(403);
+                expect(res.body).to.have.property('error');
+                expect(res.body.error).to.equal('You are not authorized to perform this task');
+            });
+        done();
+    });
 });
 describe('Delete an entry', () => {
     it('Should Not delete an entry : entry id not found', (done) => {
         chai.request(app).delete(`/api/v1/entries/${testEntry[5].entryId}/`)
-            .set('Authorization', testEntry[6].token)
+            .set('Authorization', process.env.userToken1)
             .end((err, res) => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.property('error');
@@ -179,7 +255,7 @@ describe('Delete an entry', () => {
     });
     it('Should not delete an entry: token not provided', (done) => {
         chai.request(app).delete(`/api/v1/entries/${testEntry[3].entryId}`)
-            .set('Authorization', testEntry[8].token)
+            .set('Authorization', '')
             .end((err, res) => {
                 expect(res).to.have.status(401);
                 expect(res.body).to.have.property('error');
@@ -189,7 +265,7 @@ describe('Delete an entry', () => {
     });
     it('Should not delete an entry: Invalid params', (done) => {
         chai.request(app).patch(`/api/v1/entries/${testEntry[4].entryId}`)
-            .set('Authorization', testEntry[6].token)
+            .set('Authorization', process.env.userToken1)
             .end((err, res) => {
                 expect(res).to.have.status(400);
                 expect(res.body).to.have.property('error');
@@ -199,7 +275,7 @@ describe('Delete an entry', () => {
     });
     it('Should allow successfully: entry deleted successfully', (done) => {
         chai.request(app).delete(`/api/v1/entries/${testEntry[3].entryId}`)
-            .set('Authorization', testEntry[6].token)
+            .set('Authorization', process.env.userToken1)
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body).to.have.property('data');

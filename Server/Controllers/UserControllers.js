@@ -1,6 +1,6 @@
 import users from '../Model/userModel';
 import generateToken from '../helpers/generateToken';
-import hashedPassword from '../helpers/hashPassword';
+import hashPassword from '../helpers/hashPassword';
 import checkPassword from '../helpers/checkPassword';
 
 class UsersClass {
@@ -16,7 +16,7 @@ class UsersClass {
             });
         }
         const id = users.length + 1;
-        const pass = hashedPassword(password);
+        const pass = hashPassword(password);
         const newUser = {
             id, firstName, lastName, email, password: pass,
         };

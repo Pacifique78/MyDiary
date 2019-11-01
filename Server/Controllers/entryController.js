@@ -29,15 +29,18 @@ class EntryClass {
         const { title, description } = req.body;
         const entryFound = await entries.find(entry => entry.id === id && checkOwner(req, entry.createdBy));
         if (entryFound) {
+            const editedOn = moment().format('LLL');
             entryFound.title = title;
             entryFound.description = description;
+            entryFound.editedOn = editedOn;
             return res.status(200).json({
-                status: 201,
+                status: 200,
                 data: {
                     message: 'Entry successfully edited',
                     id,
                     title,
                     description,
+                    editedOn,
                 },
             });
         } return res.status(404).json({
@@ -65,7 +68,7 @@ class EntryClass {
     }
 
     getEntries(req, res) {
-        const myEntries = entries.filter((entry) => entry.createdBy === req.tokenData.email);
+        const myEntries = entries.filter((entry) => entry.createdBy === req.tokenData.id);
         return res.status(200).json({
             status: 200,
             data: {
@@ -77,7 +80,7 @@ class EntryClass {
 
     async getSpecificEntry(req, res) {
         const id = parseInt(req.params.entryId, 10);
-        const entryFound = await entries.find(entry => entry.id === id && checkOwner(req, entry.id));
+        const entryFound = await entries.find(entry => entry.id === id && checkOwner(req, entry.createdBy));
         if (entryFound) {
             return res.status(200).json({
                 status: 200,
