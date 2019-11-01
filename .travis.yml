@@ -7,7 +7,7 @@ cache:
 before_script:
   - npm install
 script:
-  - nom run test
+  - npm run test
   - npm test
 after_success:
   - npm run coverage
