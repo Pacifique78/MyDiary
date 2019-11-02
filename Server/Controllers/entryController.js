@@ -1,5 +1,4 @@
 import moment from 'moment';
-import entries from '../Model/entriesModel';
 import checkOwner from '../helpers/checkOwner';
 
 class EntryClass {

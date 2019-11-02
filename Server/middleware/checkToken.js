@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import users from '../Model/userModel';
 
 dotenv.config();
 export const checkToken = async (req, res, next) => {

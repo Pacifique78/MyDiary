@@ -2,14 +2,14 @@
     "swagger": "2.0",
     "info": {
       "description": "MyDiary is an online journal where users can pen down their thoughts and feelings on a daily basis and keep track of their daily events. ",
-      "version": "1",
+      "version": "2",
       "title": "MyDiary",
       "termsOfService": "http://swagger.io/terms/",
       "contact": {
         "email": "tuyipaccy78@gmail.com"
       }
     },
-    "basePath": "/api/v1",
+    "basePath": "/api/v2",
     "schemes": ["http", "https"],
     "paths": {
       "/auth/signup": {

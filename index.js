@@ -14,6 +14,10 @@ app.get('/', (req, res) => res.status(200).json({ message: 'WELCOME TO MY DIARY'
 app.use(userRoutes);
 app.use(entryRoutes);
 app.use('/api/swagger/', swaggerUiexpress.serve, swaggerUiexpress.setup(swagger));
-const port = process.env.PORT || 3000;
+app.use((req, res) => res.status(400).json({
+    status: 400,
+    error: 'The route was not found',
+}));
+const port = process.env.PORT || 4000;
 app.listen(port, console.log(`Listening to port ${port}`));
 export default app;
