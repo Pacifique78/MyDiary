@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import validationHelper from '../helpers/validationHelper';
 
 export const checkNewUser = (req, res, next) => {
     const createUserSchema = Joi.object().keys({
@@ -16,17 +17,6 @@ export const checkNewUser = (req, res, next) => {
         password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).min(6).required(),
     });
     const schemasValidation = Joi.validate(req.body, createUserSchema);
-    if (schemasValidation.error) {
-        const validationErrors = [];
-        for (let i = 0; i < schemasValidation.error.details.length; i += 1) {
-            // eslint-disable-next-line quotes
-            validationErrors.push(schemasValidation.error.details[i].message.split('"').join(" "));
-        }
-        return res.status(400).json({
-            status: 400,
-            error: validationErrors[0],
-        });
-    }
-    next();
+    validationHelper(res, schemasValidation, next);
 };
 export default checkNewUser;

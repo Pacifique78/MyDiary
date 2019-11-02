@@ -1,7 +1,3 @@
-/* eslint-disable no-alert */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable func-names */
-/* eslint-disable no-extend-native */
 const findDate = () => {
     const mydate = new Date();
     const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];

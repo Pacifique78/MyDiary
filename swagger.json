@@ -1,0 +1,342 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "MyDiary is an online journal where users can pen down their thoughts and feelings on a daily basis and keep track of their daily events. ",
+      "version": "1",
+      "title": "MyDiary",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": "tuyipaccy78@gmail.com"
+      }
+    },
+    "basePath": "/api/v1",
+    "schemes": ["http", "https"],
+    "paths": {
+      "/auth/signup": {
+        "post": {
+          "tags": ["SIGN UP"],
+          "summary": "User Signup endpoint",
+          "description": "",
+          "operationId": "SIGNUP",
+          "consumes": ["application/json", "application/xml"],
+          "produces": ["application/xml", "application/json"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Enter the credentials",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/signup"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "User created"
+            },
+            "400": {
+              "description": "Bad request, Invalid input"
+            },
+            "409": {
+              "description": " User with this email already exists"
+            }
+          }
+        }
+      },
+      "/auth/signin": {
+        "post": {
+          "tags": ["SIGN IN"],
+          "summary": "User sign in endpoint",
+          "description": "",
+          "operationId": "SIGNIN",
+          "consumes": ["application/json", "application/xml"],
+          "produces": ["application/xml", "application/json"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Enter the credentials",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/signin"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User logged in successfully"
+            },
+            "400": {
+              "description": "Bad request, Invalid input"
+            },
+            "403": {
+              "description": "Invalid username / password"
+            }
+          }
+        }
+      },
+      "/entries": {
+        "post": {
+          "tags": ["CREATE ENTRY"],
+          "summary": "User will be able to add an entry endpoint",
+          "description": "",
+          "operationId": "ADD AN ENTRY",
+          "consumes": ["application/json", "application/xml"],
+          "produces": ["application/xml", "application/json"],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "Enter the Token here"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Enter the entry here",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/entries"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Entry created successfully"
+            },
+            "400": {
+              "description": "Bad request, Invalid input"
+            },
+            "403": {
+              "description": "You are not authorized to perform this task"
+            },
+            "401": {
+              "description": "Invalid Token"
+            }
+          }
+        }
+      },
+  
+      "/entries/{entryId}": {
+        "patch": {
+          "tags": ["MODIFY ENTRY"],
+          "summary": "user can edit an entry",
+          "description": "",
+          "operationId": "MODIFY ENTRY",
+          "consumes": ["application/json", "application/xml"],
+          "produces": ["application/xml", "application/json"],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "Enter your token here"
+            },
+            {
+              "name": "entryId",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Add the changes",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/entries"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Entry successfully edited"
+            },
+            "400": {
+              "description": "Bad request, Invalid input"
+            },
+            "404": {
+              "description": "Not found "
+            },
+            "403": {
+              "description": "You are not authorized to perform this task."
+            },
+            "401": {
+              "description": "Invalid token"
+            }
+          }
+        }
+      },
+      "/entries ": {
+        "get": {
+          "tags": ["VIEW ALL ENTRIES"],
+          "summary": "Return all entries of a user",
+          "description": "",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "type": "string",
+              "description": "Enter your token here"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User entries",
+              "schema": {
+                "type": "object",
+                "example": {
+                  "id": 1,
+                  "createOn": "2019/10/22 00:34:13",
+                  "userid": 1,
+                  "title": "my title",
+                  "description": "my description"
+                }
+              }
+            },
+            "404": {
+              "description": "Entries are not available"
+            },
+            "401": {
+              "description": "Invalid token"
+            },
+            "403": {
+              "description": "You are not authorized to perform this task."
+            }
+          }
+        }
+      },
+      "/entries/{entryId}  ": {
+        "get": {
+          "tags": ["VIEW SPECIFIC ENTRY"],
+          "summary": "Return specific entry of a user",
+          "description": "",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "type": "string",
+              "description": "Enter Token here"
+            },
+            {
+              "name": "entryId",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Entry retrieved successfully",
+              "schema": {
+                "type": "object"
+              }
+            },
+            "404": {
+              "description": "Not found"
+            },
+            "401": {
+              "description": "Invalid token"
+            },
+            "403": {
+              "description": "You are not authorized to perform this task."
+            }
+          }
+        }
+      },
+      "/entries/{entryId} ": {
+        "delete": {
+          "tags": ["DELETE AN ENTRY"],
+          "summary": "Deletes entry specified",
+          "description": "",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "type": "string",
+              "description": "Enter Token here"
+            },
+            {
+              "name": "entryId",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Entry deleted successfully",
+              "schema": {
+                "type": "object"
+              }
+            },
+            "404": {
+              "description": "Not found"
+            },
+            "401": {
+              "description": "Invalid token"
+            },
+            "403": {
+              "description": "You are not authorized to perform this task."
+            }
+          }
+        }
+      }
+    },
+  
+    "definitions": {
+      "signup": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "required": true
+          },
+          "lastName": {
+            "type": "string",
+            "required": true
+          },
+          "email": {
+            "type": "string",
+            "required": true
+          },
+          "password": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "signin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": true
+          },
+          "password": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "entries": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "required": true
+          },
+          "description": {
+            "type": "string",
+            "required": true
+          }
+        }
+      }
+    }
+  }
