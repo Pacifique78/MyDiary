@@ -135,25 +135,26 @@ describe('Get all entries', () => {
         done();
     });
 });
-describe('Delete an entry', () => {
-    it('Should Not delete an entry : entry id not found', (done) => {
-        chai.request(app).delete(`/api/v2/entries/${testEntry[5].entryId}/`)
+describe('Get specific entry', () => {
+    it('Should not return an entry : entryId not found', (done) => {
+        chai.request(app).get(`/api/v2/entries/${testEntry[5].entryId}`)
             .set('Authorization', process.env.userToken1)
             .end((err, res) => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.property('error');
-                expect(res.body.error).to.equal('Entry not found');
+                expect(res.body.error).to.equal('entry not found');
             });
         done();
     });
-    it('Should allow successfully: entry deleted successfully', (done) => {
-        chai.request(app).delete(`/api/v2/entries/${testEntry[3].entryId}`)
+    it('Should return an entry with the specified ID', (done) => {
+        chai.request(app).get(`/api/v2/entries/${testEntry[3].entryId}`)
             .set('Authorization', process.env.userToken1)
             .end((err, res) => {
                 expect(res).to.have.status(200);
-                expect(res.body).to.have.property('data');
+                expect(res.body.data).to.be.a('object');
                 expect(res.body.data).to.have.property('message');
-                expect(res.body.data.message).to.equal('Entry successfully deleted');
+                expect(res.body.data).to.have.property('entryFound');
+                expect(res.body.data.entryFound).to.be.a('object');
             });
         done();
     });
