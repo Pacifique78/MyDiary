@@ -6,7 +6,6 @@ export const checkNewUser = (req, res, next) => {
         firstName: Joi.string()
             .alphanum()
             .min(3)
-            .max(20)
             .required(),
         lastName: Joi.string()
             .alphanum()
