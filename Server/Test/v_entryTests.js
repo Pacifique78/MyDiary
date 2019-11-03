@@ -74,16 +74,6 @@ describe('Create a new entry', () => {
             });
         done();
     });
-    it('Should NOT create an entry: database error', (done) => {
-        chai.request(app).post('/api/v2/entries')
-            .set('Authorization', process.env.userToken2)
-            .send(testEntry[7])
-            .end((err, res) => {
-                expect(res).to.have.status(400);
-                expect(res.body).to.have.property('error');
-                done();
-            });
-    });
 });
 describe('Modify an entry', () => {
     it('Should return a success: entry successfully edited', (done) => {
@@ -131,15 +121,18 @@ describe('Modify an entry', () => {
                 done();
             });
     });
-    it('Should NOT update an entry: database error', (done) => {
-        chai.request(app).patch(`/api/v2/entries/${testEntry[3].entryId}`)
+});
+describe('Get all entries', () => {
+    it('Should should return all entries', (done) => {
+        chai.request(app).get('/api/v2/entries')
             .set('Authorization', process.env.userToken1)
-            .send(testEntry[7])
             .end((err, res) => {
-                expect(res).to.have.status(400);
-                expect(res.body).to.have.property('error');
-                done();
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.property('data');
+                expect(res.body.data).to.be.a('object');
+                expect(res.body.message).to.equal('Entries successfully retreived');
             });
+        done();
     });
 });
 describe('Delete an entry', () => {

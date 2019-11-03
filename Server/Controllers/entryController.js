@@ -21,8 +21,8 @@ class EntryClass {
             });
         } catch (error) {
             const message = error.message || 'Unknown error occured';
-            res.status(400).json({
-                status: 400,
+            res.status(500).json({
+                status: 500,
                 error: {
                     message,
                 },
@@ -55,8 +55,8 @@ class EntryClass {
             });
         } catch (error) {
             const message = error.message || 'Unknown error occured';
-            res.status(400).json({
-                status: 400,
+            res.status(500).json({
+                status: 500,
                 error: {
                     message,
                 },
@@ -85,8 +85,8 @@ class EntryClass {
             });
         } catch (error) {
             const message = error.message || 'Unknown error occured';
-            res.status(400).json({
-                status: 400,
+            res.status(500).json({
+                status: 500,
                 error: {
                     message,
                 },
@@ -94,15 +94,27 @@ class EntryClass {
         }
     }
 
-    getEntries(req, res) {
-        const myEntries = entries.filter((entry) => entry.createdBy === req.tokenData.id);
-        return res.status(200).json({
-            status: 200,
-            data: {
+    async getEntries(req, res) {
+        try {
+            const selectQuerry = 'SELECT * FROM entries WHERE createdby=$1;';
+            const value = [req.tokenData.id];
+            const results = await querry(selectQuerry, value);
+            return res.status(200).json({
+                status: 200,
                 message: 'Entries successfully retreived',
-                myEntries,
-            },
-        });
+                data: {
+                    results,
+                },
+            });
+        } catch (error) {
+            const message = error.message || 'Unknown error occured';
+            res.status(500).json({
+                status: 500,
+                error: {
+                    message,
+                },
+            });
+        }
     }
 
     async getSpecificEntry(req, res) {
