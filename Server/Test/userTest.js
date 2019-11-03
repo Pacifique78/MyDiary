@@ -65,6 +65,15 @@ describe('User SignUp', () => {
                 done();
             });
     });
+    it('Should NOT allow a user to signup: database error', (done) => {
+        chai.request(app).post('/api/v2/auth/signup')
+            .send(testUser[8])
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body).to.have.property('error');
+                done();
+            });
+    });
 });
 describe('User Signin', () => {
     it('Should allow a user to signin', (done) => {

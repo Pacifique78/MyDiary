@@ -74,6 +74,16 @@ describe('Create a new entry', () => {
             });
         done();
     });
+    it('Should NOT create an entry: database error', (done) => {
+        chai.request(app).post('/api/v2/entries')
+            .set('Authorization', process.env.userToken2)
+            .send(testEntry[7])
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body).to.have.property('error');
+                done();
+            });
+    });
 });
 describe('Modify an entry', () => {
     it('Should return a success: entry successfully edited', (done) => {
@@ -120,5 +130,38 @@ describe('Modify an entry', () => {
                 expect(res.body.error).to.equal(' entryId  must be a positive number');
                 done();
             });
+    });
+    it('Should NOT update an entry: database error', (done) => {
+        chai.request(app).patch(`/api/v2/entries/${testEntry[3].entryId}`)
+            .set('Authorization', process.env.userToken1)
+            .send(testEntry[7])
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body).to.have.property('error');
+                done();
+            });
+    });
+});
+describe('Delete an entry', () => {
+    it('Should Not delete an entry : entry id not found', (done) => {
+        chai.request(app).delete(`/api/v2/entries/${testEntry[5].entryId}/`)
+            .set('Authorization', process.env.userToken1)
+            .end((err, res) => {
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.property('error');
+                expect(res.body.error).to.equal('Entry not found');
+            });
+        done();
+    });
+    it('Should allow successfully: entry deleted successfully', (done) => {
+        chai.request(app).delete(`/api/v2/entries/${testEntry[3].entryId}`)
+            .set('Authorization', process.env.userToken1)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.property('data');
+                expect(res.body.data).to.have.property('message');
+                expect(res.body.data.message).to.equal('Entry successfully deleted');
+            });
+        done();
     });
 });

@@ -40,7 +40,8 @@ class UsersClass {
             });
         } catch (error) {
             const message = error.message || 'Unknown error occured';
-            res.status(400).json({
+            res.status(401).json({
+                status: 401,
                 error: {
                     message,
                 },
@@ -49,25 +50,35 @@ class UsersClass {
     }
 
     async login(req, res) {
-        const { email, password } = req.body;
-        const selectQuery = 'SELECT * FROM users where email=$1 ;';
-        const value = [email];
-        const rows = await querry(selectQuery, value);
-        if (rows[0] && checkPassword(password, rows[0].password)) {
-            const { id } = rows[0];
-            const token = generateToken(id, email);
-            return res.status(200).json({
-                status: 200,
-                message: 'User logged in successfully',
-                data: {
-                    token,
+        try {
+            const { email, password } = req.body;
+            const selectQuery = 'SELECT * FROM users where email=$1 ;';
+            const value = [email];
+            const rows = await querry(selectQuery, value);
+            if (rows[0] && checkPassword(password, rows[0].password)) {
+                const { id } = rows[0];
+                const token = generateToken(id, email);
+                return res.status(200).json({
+                    status: 200,
+                    message: 'User logged in successfully',
+                    data: {
+                        token,
+                    },
+                });
+            }
+            return res.status(401).json({
+                status: 401,
+                error: 'Invalid username / password',
+            });
+        } catch (error) {
+            const message = error.message || 'Unknown error occured';
+            res.status(400).json({
+                status: 400,
+                error: {
+                    message,
                 },
             });
         }
-        return res.status(401).json({
-            status: 401,
-            error: 'Invalid username / password',
-        });
     }
 }
 const newClass = new UsersClass();
