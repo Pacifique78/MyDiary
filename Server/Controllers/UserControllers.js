@@ -40,8 +40,8 @@ class UsersClass {
             });
         } catch (error) {
             const message = error.message || 'Unknown error occured';
-            res.status(401).json({
-                status: 401,
+            res.status(500).json({
+                status: 500,
                 error: {
                     message,
                 },
@@ -72,8 +72,8 @@ class UsersClass {
             });
         } catch (error) {
             const message = error.message || 'Unknown error occured';
-            res.status(400).json({
-                status: 400,
+            res.status(500).json({
+                status: 500,
                 error: {
                     message,
                 },
