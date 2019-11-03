@@ -1,24 +1,21 @@
 import moment from 'moment';
 import checkOwner from '../helpers/checkOwner';
+import { querry } from '../db';
 
 class EntryClass {
     async createEntry(req, res) {
         const { title, description } = req.body;
-        const id = entries.length + 1;
         const createdBy = await req.tokenData.id;
         const createdOn = moment().format('LLL');
-        const newEntry = {
-            id, createdBy, createdOn, title, description,
-        };
-        entries.push(newEntry);
+        const insertQuery = 'INSERT INTO entries (createdby, createdon, title, description, editedOn) VALUES ($1, $2, $3, $4, $5) RETURNING *;';
+        const values = [createdBy, createdOn, title, description, createdOn];
+        const result = await querry(insertQuery, values);
+        const data = result[0];
         return res.status(201).json({
             status: 201,
+            message: 'Entry created successfully',
             data: {
-                message: 'Entry created successfully',
-                id,
-                createdOn,
-                title,
-                description,
+                data,
             },
         });
     }
