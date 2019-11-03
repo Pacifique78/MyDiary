@@ -16,25 +16,14 @@ describe('Create a new entry', () => {
             .end((err, res) => {
                 expect(res).to.have.status(201);
                 expect(res.body.data).to.be.a('object');
-                expect(res.body.data.message).to.equal('Entry created successfully');
-            });
-        done();
-    });
-    it('Should return a success: second entry created', (done) => {
-        chai.request(app).post('/api/v2/entries')
-            .set('Authorization', process.env.userToken2)
-            .send(testEntry[0])
-            .end((err, res) => {
-                expect(res).to.have.status(201);
-                expect(res.body.data).to.be.a('object');
-                expect(res.body.data.message).to.equal('Entry created successfully');
+                expect(res.body.message).to.equal('Entry created successfully');
             });
         done();
     });
     it('Should return an error: unauthorized access', (done) => {
         chai.request(app).post('/api/v2/entries')
             .set('Authorization', process.env.falseToken)
-            .send(testEntry[1])
+            .send(testEntry[0])
             .end((err, res) => {
                 expect(res).to.have.status(403);
                 expect(res.body).to.have.property('error');
@@ -71,6 +60,17 @@ describe('Create a new entry', () => {
             .end((err, res) => {
                 expect(res).to.have.status(401);
                 expect(res.body).to.have.property('error');
+            });
+        done();
+    });
+    it('Should return a success: second entry created', (done) => {
+        chai.request(app).post('/api/v2/entries')
+            .set('Authorization', process.env.userToken2)
+            .send(testEntry[0])
+            .end((err, res) => {
+                expect(res).to.have.status(201);
+                expect(res.body.data).to.be.a('object');
+                expect(res.body.message).to.equal('Entry created successfully');
             });
         done();
     });
