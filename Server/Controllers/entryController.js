@@ -23,21 +23,20 @@ class EntryClass {
     async modifyEntry(req, res) {
         const id = parseInt(req.params.entryId, 10);
         const { title, description } = req.body;
-        const entryFound = await entries.find(entry => entry.id === id && checkOwner(req, entry.createdBy));
-        if (entryFound) {
+        const selectQuerry = 'SELECT * FROM entries WHERE id=$1';
+        const entryFound = await querry(selectQuerry, [id]);
+        if (entryFound[0] && checkOwner(req, entryFound[0].createdby)) {
             const editedOn = moment().format('LLL');
+            const updateQuery = 'UPDATE entries SET title=$1, description=$2, editedOn=$3 WHERE id =$4 RETURNING *;';
+            const values = [title, description, editedOn, id];
+            const data = await querry(updateQuery, values);
             entryFound.title = title;
             entryFound.description = description;
             entryFound.editedOn = editedOn;
             return res.status(200).json({
                 status: 200,
-                data: {
-                    message: 'Entry successfully edited',
-                    id,
-                    title,
-                    description,
-                    editedOn,
-                },
+                message: 'Entry successfully edited',
+                data: data[0],
             });
         } return res.status(404).json({
             status: 404,
