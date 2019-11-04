@@ -131,8 +131,8 @@ describe('Get all entries', () => {
                 expect(res.body).to.have.property('data');
                 expect(res.body.data).to.be.a('object');
                 expect(res.body.message).to.equal('Entries successfully retreived');
+                done();
             });
-        done();
     });
 });
 describe('Get specific entry', () => {
@@ -143,8 +143,8 @@ describe('Get specific entry', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.property('error');
                 expect(res.body.error).to.equal('entry not found');
+                done();
             });
-        done();
     });
     it('Should return an entry with the specified ID', (done) => {
         chai.request(app).get(`/api/v2/entries/${testEntry[3].entryId}`)
@@ -152,10 +152,30 @@ describe('Get specific entry', () => {
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body.data).to.be.a('object');
-                expect(res.body.data).to.have.property('message');
-                expect(res.body.data).to.have.property('entryFound');
-                expect(res.body.data.entryFound).to.be.a('object');
+                expect(res.body).to.have.property('message');
+                expect(res.body).to.have.property('data');
+                done();
             });
-        done();
+    });
+});
+describe('Delete an entry', () => {
+    it('Should Not delete an entry : entry id not found', (done) => {
+        chai.request(app).delete(`/api/v2/entries/${testEntry[5].entryId}/`)
+            .set('Authorization', process.env.userToken1)
+            .end((err, res) => {
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.property('error');
+                expect(res.body.error).to.equal('Entry not found');
+                done();
+            });
+    });
+    it('Should allow successfully: entry deleted successfully', (done) => {
+        chai.request(app).delete(`/api/v2/entries/${testEntry[3].entryId}`)
+            .set('Authorization', process.env.userToken1)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body.message).to.equal('Entry successfully deleted');
+                done();
+            });
     });
 });
