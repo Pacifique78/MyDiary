@@ -1,9 +1,13 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import { describe, it } from 'mocha';
-import app from '../../index';
+import app from '../../../index';
 import testUser from '../Model/mockData/testUSer';
+import v1UserTEst from '../../V1/Test/userTest.test';
+import v1EntryTest from '../../V1/Test/v_entryTests.test';
 
+v1UserTEst();
+v1EntryTest();
 const { expect } = chai;
 chai.use(chaiHttp);
 describe('Welcome Home page', () => {

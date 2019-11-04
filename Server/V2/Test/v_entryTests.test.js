@@ -2,7 +2,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import { describe, it } from 'mocha';
 import dotenv from 'dotenv';
-import app from '../../index';
+import app from '../../../index';
 import testEntry from '../Model/mockData/testEntry';
 
 dotenv.config();
