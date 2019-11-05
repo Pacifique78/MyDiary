@@ -1,10 +1,11 @@
 import express from 'express';
-import eClass from '../Controllers/entryController';
+import EntryClass from '../Controllers/entryController';
 import { checkToken } from '../middleware/checkToken';
 import { checkNewEntry } from '../middleware/checkNewEntry';
 import { validateEntryParams } from '../middleware/checkParams';
 
 const router = express.Router();
+const eClass = new EntryClass();
 router.post('/api/v1/entries', [checkToken, checkNewEntry], eClass.createEntry);
 router.patch('/api/v1/entries/:entryId', [checkToken, checkNewEntry, validateEntryParams], eClass.modifyEntry);
 router.delete('/api/v1/entries/:entryId', [checkToken, validateEntryParams], eClass.deleteEntry);

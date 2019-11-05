@@ -96,5 +96,4 @@ class EntryClass {
         });
     }
 }
-const eClass = new EntryClass();
-export default eClass;
+export default EntryClass;
