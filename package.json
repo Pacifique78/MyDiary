@@ -4,7 +4,7 @@
   "description": "MyDiary is an online journal where users can pen down their thoughts and feelings. ",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production && npm run create && babel-node index.js",
+    "start": "babel-node index.js",
     "lint": "eslint ./",
     "test": "cross-env NODE_ENV=test && npm run drop && npm run create && nyc --reporter=html --reporter=text mocha --require @babel/register Server/V2/Test/* --exit",
     "dev": "npm run create && nodemon --exec babel-node index.js",
@@ -33,6 +33,7 @@
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "cross-env": "^6.0.3",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "joi": "^14.3.1",
@@ -45,7 +46,6 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.7",
-    "cross-env": "^6.0.3",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
