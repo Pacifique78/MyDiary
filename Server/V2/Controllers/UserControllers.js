@@ -61,5 +61,4 @@ class UsersClass {
         });
     }
 }
-const newClass = new UsersClass();
-export default newClass;
+export default UsersClass;

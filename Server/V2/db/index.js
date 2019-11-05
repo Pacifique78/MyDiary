@@ -8,9 +8,5 @@ export const querry = async (queryString, values = []) => pool.connect()
         .then(res => {
             client.release();
             return res.rows;
-        })
-        .catch(error => {
-            client.release();
-            throw error;
         }));
 export default querry;

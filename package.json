@@ -6,11 +6,11 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production && npm run create && babel-node index.js",
     "lint": "eslint ./",
-    "test": "cross-env NODE_ENV=test && npm run drop && npm run create && nyc --reporter=html --reporter=text mocha --require @babel/register Server/Test/* --exit",
+    "test": "cross-env NODE_ENV=test && npm run drop && npm run create && nyc --reporter=html --reporter=text mocha --require @babel/register Server/V2/Test/* --exit",
     "dev": "npm run create && nodemon --exec babel-node index.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "create": "babel-node Server/Model/createTables.js createTables",
-    "drop": "babel-node Server/Model/dropTables.js dropTables"
+    "create": "babel-node Server/V2/Model/createTables.js createTables",
+    "drop": "babel-node Server/V2/Model/dropTables.js dropTables"
   },
   "repository": {
     "type": "git",
