@@ -1,10 +1,10 @@
 {
   "name": "mydiary",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "MyDiary is an online journal where users can pen down their thoughts and feelings. ",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js",
+    "start": "npm run create && babel-node index.js",
     "lint": "eslint ./",
     "test": "cross-env NODE_ENV=test && npm run drop && npm run create && nyc --reporter=html --reporter=text mocha --require @babel/register Server/V2/Test/* --exit",
     "dev": "npm run create && nodemon --exec babel-node index.js",
