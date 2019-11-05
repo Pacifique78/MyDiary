@@ -1,7 +1,7 @@
 import express from 'express';
 import UsersClass from '../Controllers/UserControllers';
-import { checkNewUser } from '../middleware/checkNewUser';
-import { checkLoginUser } from '../middleware/checkLoginUser';
+import { checkNewUser } from '../../middleware/checkNewUser';
+import { checkLoginUser } from '../../middleware/checkLoginUser';
 
 const router = express.Router();
 const newclass = new UsersClass();

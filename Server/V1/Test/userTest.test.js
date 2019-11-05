@@ -2,7 +2,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import { describe, it } from 'mocha';
 import app from '../../../index';
-import testUser from '../Model/mockData/testUSer';
+import testUser from '../../mockData/testUSer';
 
 const v1USerTests = () => {
     const { expect } = chai;
@@ -13,6 +13,15 @@ const v1USerTests = () => {
                 .end((err, res) => {
                     expect(res.body).to.have.ownProperty('message');
                     expect(res.body.message).to.equal('WELCOME TO MY DIARY');
+                    done();
+                });
+        });
+        it('Should return an error', (done) => {
+            chai.request(app).get('/api/v2/ent')
+                .end((err, res) => {
+                    expect(res).to.have.status(400);
+                    expect(res.body).to.have.ownProperty('error');
+                    expect(res.body.error).to.equal('The route was not found');
                     done();
                 });
         });

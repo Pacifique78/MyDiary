@@ -1,5 +1,5 @@
 import moment from 'moment';
-import checkOwner from '../helpers/checkOwner';
+import checkOwner from '../../helpers/checkOwner';
 import { querry } from '../db';
 
 class EntryClass {
@@ -51,10 +51,7 @@ class EntryClass {
         if (entryFound[0] && checkOwner(req, entryFound[0].createdby)) {
             const deleteQuerry = 'DELETE FROM entries WHERE id=$1;';
             await querry(deleteQuerry, [id]);
-            return res.status(200).json({
-                status: 200,
-                message: 'Entry successfully deleted',
-            });
+            return res.status(204).json();
         }
         return res.status(404).json({
             status: 404,
@@ -66,6 +63,12 @@ class EntryClass {
         const selectQuerry = 'SELECT * FROM entries WHERE createdby=$1;';
         const value = [req.tokenData.id];
         const results = await querry(selectQuerry, value);
+        if (!results[0]) {
+            return res.status(404).json({
+                status: 404,
+                error: 'No entry found',
+            });
+        }
         return res.status(200).json({
             status: 200,
             message: 'Entries successfully retreived',

@@ -2,7 +2,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import { describe, it } from 'mocha';
 import app from '../../../index';
-import testUser from '../Model/mockData/testUSer';
+import testUser from '../../mockData/testUSer';
 import v1UserTEst from '../../V1/Test/userTest.test';
 import v1EntryTest from '../../V1/Test/v_entryTests.test';
 
@@ -10,16 +10,6 @@ v1UserTEst();
 v1EntryTest();
 const { expect } = chai;
 chai.use(chaiHttp);
-describe('Welcome Home page', () => {
-    it('Should return a welcome text', (done) => {
-        chai.request(app).get('/')
-            .end((err, res) => {
-                expect(res.body).to.have.ownProperty('message');
-                expect(res.body.message).to.equal('WELCOME TO MY DIARY');
-                done();
-            });
-    });
-});
 describe('User SignUp', () => {
     it('Should allow a user to signup', (done) => {
         chai.request(app).post('/api/v2/auth/signup')

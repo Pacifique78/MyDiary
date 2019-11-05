@@ -1,7 +1,7 @@
 import users from '../Model/userModel';
-import generateToken from '../helpers/generateToken';
-import hashPassword from '../helpers/hashPassword';
-import checkPassword from '../helpers/checkPassword';
+import generateToken from '../../helpers/generateToken';
+import hashPassword from '../../helpers/hashPassword';
+import checkPassword from '../../helpers/checkPassword';
 
 class UsersClass {
     async createUser(req, res) {
