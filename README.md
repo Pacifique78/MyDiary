@@ -19,10 +19,15 @@
 * PT board link: (https://www.pivotaltracker.com/n/projects/2400721)
 ## UI Template
 * use this link to access the UI templates  https://pacifique78.github.io/MyDiary/UI/
+## Heroku link 
+* use this link to access heroku: https://my-diary-heroku.herokuapp.com/
+## Swagger Documantation
+* Link: https://my-diary-heroku.herokuapp.com/api/swagger/
 ## Installation(Tools)
 * Text Editor: Visual Code Studio
 * Node/Express
 * Postman
+* Postgres
 ## SetUp Project to get Started
 * Clone this repo
 * install all dependencies using 
@@ -30,7 +35,9 @@
 * Start Server
     :npm run dev
 * Run Postman to check API Endpoints on
-    :localhost:6000
+    :localhost:4000
+* Test
+    :npm test
 ## Methods and paths to test API Endpoints
 | Method      | Path                                                           | Description                          |
 |-------------|----------------------------------------------------------------|--------------------------------------|
@@ -41,6 +48,14 @@
 | DELETE      | /api/v1/entries/entryId                                        | Delete an entry                      |
 | GET         | /api/v1/entries                                                | View all entries                     |
 | GET         | /api/v1/entries/entryId                                        | View a specific entry                |
+| POST        | /api/v2/auth/signup                                            | Create User Account                  |
+| POST        | /api/v2/auth/signin                                            | User login                           |
+| PATCH       | /api/v2/auth/reminder                                          | change notification settings         |
+| POST        | /api/v2/entries                                                | Add an entry                         |
+| PATCH       | /api/v2/entries/entryId                                        | Modify an entry                      |
+| DELETE      | /api/v2/entries/entryId                                        | Delete an entry                      |
+| GET         | /api/v2/entries                                                | View all entries                     |
+| GET         | /api/v2/entries/entryId                                        | View a specific entry                |
 ## Technologies Used
 ### Bank-End
 * Node / Express js
@@ -48,9 +63,10 @@
 * Joi
 * Travis CI
 * Code Coveralls
+* Postgres
 ### Front-End
 * HTML
 * CSS
 * JavaScript
 
-* Prepared by Pacifique TUYIZERE 
+### Prepared by Pacifique TUYIZERE     copyright©2019 All Right Reserved
