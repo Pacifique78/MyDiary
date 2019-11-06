@@ -1,6 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import { describe, it } from 'mocha';
+
 import app from '../../../index';
 import testUser from '../../mockData/testUSer';
 import v1UserTEst from '../../V1/Test/userTest.test';
@@ -89,6 +90,17 @@ describe('User Signin', () => {
                 expect(res).to.have.status(400);
                 expect(res.body).to.have.property('error');
                 expect(res.body.error).to.equal(' password  is required');
+                done();
+            });
+    });
+});
+describe('Change notification settings', () => {
+    it('should set notification', (done) => {
+        chai.request(app).patch('/api/v2/auth/reminder')
+            .set('Authorization', process.env.userToken1)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.property('message');
                 done();
             });
     });

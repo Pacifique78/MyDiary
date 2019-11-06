@@ -8,6 +8,7 @@ export const createTables = () => {
         lastname character varying(30) NOT NULL,
         email character varying(50) NOT NULL,
         password character varying(500) NOT NULL,
+        notification character varying(5) NOT NULL,
         PRIMARY KEY(id)
     );
     CREATE TABLE IF NOT EXISTS

@@ -20,10 +20,8 @@ class UsersClass {
             });
         }
         const pass = hashPassword(password);
-        const insertQuery = `INSERT INTO users (firstname, lastname, email, password) 
-            VALUES ($1, $2, $3, $4) RETURNING *;`;
-        const values = [firstName, lastName, email, pass];
-        const result = await querry(insertQuery, values);
+        const insertQuery = 'INSERT INTO users (firstname, lastname, email, password, notification) VALUES ($1, $2, $3, $4, $5) RETURNING *;';
+        const result = await querry(insertQuery, [firstName, lastName, email, pass, 'off']);
         const { id } = result[0];
         const token = generateToken(id, email);
         return res.status(201).json({
@@ -58,6 +56,25 @@ class UsersClass {
         return res.status(401).json({
             status: 401,
             error: 'Invalid username / password',
+        });
+    }
+
+    async setNotification(req, res) {
+        const { id } = req.tokenData;
+        const selectQuery = 'SELECT * FROM users where id=$1';
+        const result = await querry(selectQuery, [id]);
+        const updateQuery = 'UPDATE users set notification = $1 where id=$2';
+        if (result[0].notification === 'off') {
+            await querry(updateQuery, ['on', id]);
+            return res.status(200).json({
+                status: 200,
+                message: 'notification setted on',
+            });
+        }
+        await querry(updateQuery, ['off', id]);
+        return res.status(200).json({
+            status: 200,
+            message: 'notification setted off',
         });
     }
 }
