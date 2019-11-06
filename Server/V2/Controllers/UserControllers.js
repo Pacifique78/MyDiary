@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
-import generateToken from '../helpers/generateToken';
-import hashPassword from '../helpers/hashPassword';
+import generateToken from '../../helpers/generateToken';
+import hashPassword from '../../helpers/hashPassword';
 import { querry } from '../db';
-import checkPassword from '../helpers/checkPassword';
+import checkPassword from '../../helpers/checkPassword';
 
 dotenv.config();
 class UsersClass {

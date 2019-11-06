@@ -1,8 +1,8 @@
 import express from 'express';
 import EntryClass from '../Controllers/entryController';
-import { checkToken } from '../middleware/checkToken';
-import { checkNewEntry } from '../middleware/checkNewEntry';
-import { validateEntryParams } from '../middleware/checkParams';
+import { checkToken } from '../../middleware/checkTokenV1';
+import { checkNewEntry } from '../../middleware/checkNewEntry';
+import { validateEntryParams } from '../../middleware/checkParams';
 
 const router = express.Router();
 const eClass = new EntryClass();

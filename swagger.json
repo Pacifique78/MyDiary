@@ -186,17 +186,7 @@
           ],
           "responses": {
             "200": {
-              "description": "User entries",
-              "schema": {
-                "type": "object",
-                "example": {
-                  "id": 1,
-                  "createOn": "2019/10/22 00:34:13",
-                  "userid": 1,
-                  "title": "my title",
-                  "description": "my description"
-                }
-              }
+              "description": "Entries successfully retreived"
             },
             "404": {
               "description": "Entries are not available"
@@ -232,10 +222,7 @@
           ],
           "responses": {
             "200": {
-              "description": "Entry retrieved successfully",
-              "schema": {
-                "type": "object"
-              }
+              "description": "Entry retrieved successfully"
             },
             "404": {
               "description": "Not found"
