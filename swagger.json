@@ -274,6 +274,36 @@
             }
           }
         }
+      },
+      "/auth/reminder": {
+        "patch": {
+          "tags": ["CHANGE NOTIFICATION"],
+          "summary": "user can change notification settings",
+          "description": "",
+          "operationId": "CHANGE NOTIFICATION",
+          "consumes": ["application/json", "application/xml"],
+          "produces": ["application/xml", "application/json"],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "Enter your token here"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "notification set on/off"
+            },
+            "403": {
+              "description": "You are not authorized to perform this task."
+            },
+            "401": {
+              "description": "Invalid token"
+            }
+          }
+        }
       }
     },
   
