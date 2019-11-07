@@ -68,13 +68,13 @@ class UsersClass {
             await querry(updateQuery, ['on', id]);
             return res.status(200).json({
                 status: 200,
-                message: 'notification setted on',
+                message: 'notification set on',
             });
         }
         await querry(updateQuery, ['off', id]);
         return res.status(200).json({
             status: 200,
-            message: 'notification setted off',
+            message: 'notification set off',
         });
     }
 }

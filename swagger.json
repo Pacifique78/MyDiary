@@ -294,7 +294,7 @@
           ],
           "responses": {
             "200": {
-              "description": "notification setted on/off"
+              "description": "notification set on/off"
             },
             "403": {
               "description": "You are not authorized to perform this task."
