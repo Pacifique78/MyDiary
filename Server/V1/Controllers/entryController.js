@@ -1,6 +1,6 @@
 import moment from 'moment';
 import entries from '../Model/entriesModel';
-import checkOwner from '../helpers/checkOwner';
+import checkOwner from '../../helpers/checkOwner';
 
 class EntryClass {
     async createEntry(req, res) {
@@ -54,12 +54,7 @@ class EntryClass {
         const entryFound = await entries.find(entry => entry.id === id && checkOwner(req, entry.createdBy));
         if (entryFound) {
             entries.splice(entryFound, 1);
-            return res.status(200).json({
-                status: 200,
-                data: {
-                    message: 'Entry successfully deleted',
-                },
-            });
+            return res.status(204).json();
         }
         return res.status(404).json({
             status: 404,
@@ -69,6 +64,12 @@ class EntryClass {
 
     getEntries(req, res) {
         const myEntries = entries.filter((entry) => entry.createdBy === req.tokenData.id);
+        if (!myEntries[0]) {
+            return res.status(404).json({
+                status: 404,
+                error: 'No entry found',
+            });
+        }
         return res.status(200).json({
             status: 200,
             data: {
@@ -96,5 +97,4 @@ class EntryClass {
         });
     }
 }
-const eClass = new EntryClass();
-export default eClass;
+export default EntryClass;

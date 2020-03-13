@@ -2,14 +2,14 @@
     "swagger": "2.0",
     "info": {
       "description": "MyDiary is an online journal where users can pen down their thoughts and feelings on a daily basis and keep track of their daily events. ",
-      "version": "1",
+      "version": "2",
       "title": "MyDiary",
       "termsOfService": "http://swagger.io/terms/",
       "contact": {
         "email": "tuyipaccy78@gmail.com"
       }
     },
-    "basePath": "/api/v1",
+    "basePath": "/api/v2",
     "schemes": ["http", "https"],
     "paths": {
       "/auth/signup": {
@@ -70,7 +70,7 @@
             "400": {
               "description": "Bad request, Invalid input"
             },
-            "403": {
+            "401": {
               "description": "Invalid username / password"
             }
           }
@@ -186,17 +186,7 @@
           ],
           "responses": {
             "200": {
-              "description": "User entries",
-              "schema": {
-                "type": "object",
-                "example": {
-                  "id": 1,
-                  "createOn": "2019/10/22 00:34:13",
-                  "userid": 1,
-                  "title": "my title",
-                  "description": "my description"
-                }
-              }
+              "description": "Entries successfully retreived"
             },
             "404": {
               "description": "Entries are not available"
@@ -232,10 +222,7 @@
           ],
           "responses": {
             "200": {
-              "description": "Entry retrieved successfully",
-              "schema": {
-                "type": "object"
-              }
+              "description": "Entry retrieved successfully"
             },
             "404": {
               "description": "Not found"
@@ -284,6 +271,36 @@
             },
             "403": {
               "description": "You are not authorized to perform this task."
+            }
+          }
+        }
+      },
+      "/auth/reminder": {
+        "patch": {
+          "tags": ["CHANGE NOTIFICATION"],
+          "summary": "user can change notification settings",
+          "description": "",
+          "operationId": "CHANGE NOTIFICATION",
+          "consumes": ["application/json", "application/xml"],
+          "produces": ["application/xml", "application/json"],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "Enter your token here"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "notification set on/off"
+            },
+            "403": {
+              "description": "You are not authorized to perform this task."
+            },
+            "401": {
+              "description": "Invalid token"
             }
           }
         }

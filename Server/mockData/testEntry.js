@@ -14,6 +14,9 @@ const testEntry = [
         entryId: -1,
     }, {
         entryId: 500,
+    }, {
+        title: 'My title My title My title My title My title',
+        description: 'My description',
     },
 ];
 export default testEntry;

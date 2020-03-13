@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { querry } from '../V2/db/index';
+import users from '../V1/Model/userModel';
 
 dotenv.config();
 export const checkToken = async (req, res, next) => {
@@ -14,10 +14,8 @@ export const checkToken = async (req, res, next) => {
     try {
         const verified = jwt.verify(authorization, process.env.secret);
         req.tokenData = verified;
-        const selectQuery = 'SELECT * FROM users WHERE id=$1';
-        const value = [req.tokenData.id];
-        const userFound = await querry(selectQuery, value);
-        if (!userFound[0]) {
+        const userFound = await users.find(user => user.id === req.tokenData.id);
+        if (!userFound) {
             return res.status(403).json({
                 status: 403,
                 error: 'You are not authorized to perform this task',
