@@ -15,6 +15,7 @@ export const checkNewUser = (req, res, next) => {
             .required(),
         email: Joi.string().email({ minDomainSegments: 2 }).required(),
         password: Joi.string().regex(/^[a-zA-Z0-9!@#$%^&*]{3,30}$/).min(8).required(),
+        confirmPassword: Joi.any().valid(Joi.ref('password')).required(),
     });
     const schemasValidation = Joi.validate(req.body, createUserSchema);
     validationHelper(res, schemasValidation, next);

@@ -76,25 +76,36 @@
         <div id="login">
             <div class="login-form" id="login-form">
                 <span class="close" id="close-form">&times</span>
-                <form class = sbt-login>
-                    <input type="text" placeholder="Email" type="email" required>
-                    <input type="password" placeholder="Password" required>
-                    <button id="login-page-btn">LOGIN</button>
+                <form id = "sbt-login">
+                    <input type="text" placeholder="Email" type="email" id="login-email">
+                    <div id="login-email-div" class="fields"></div>
+                    <input type="password" placeholder="Password" id="login-password">
+                    <div id="login-password-div" class="fields"></div>
+                    <div id="login-error" class="error"></div>
+                    <br><button id="login-page-btn">LOGIN</button>
                     <span id="create-account-login">Create account</span>
+                    <br><div id="login-message" class="message"></div>
                 </form>
             </div>
         </div>
         <div id="create">
                 <div class="create-account" id="create-account">
                     <span class="close" id="close-create-form">&times</span>
-                    <form class="sbt-create">
-                        <input type="text" placeholder="First Name" required>
-                        <input type="text" placeholder="Last Name" required>
-                        <input type="email" placeholder="Email" required>
-                        <input type="password" placeholder="Password" required>
-                        <input type="password" placeholder="Confirm password" required>
-                        <button id="new-account-btn">CREATE</button>
+                    <form class="sbt-create" id="sbt-create">
+                        <input type="text" placeholder="First Name" id="firstName" >
+                        <div id="firstName-div" class="fields"></div>
+                        <input type="text" placeholder="Last Name" id="lastName" >
+                        <div id="lastName-div" class="fields"></div>
+                        <input type="email" placeholder="Email" id="email" >
+                        <div id="email-div" class="fields"></div>
+                        <input type="password" placeholder="Password" id="password" >
+                        <div id="password-div" class="fields"></div>
+                        <input type="password" placeholder="Confirm password" id="confirmPassword">
+                        <div id="confirmPassword-div" class="fields"></div>
+                        <div id="error" class="error"></div>
+                        <br><button id="new-account-btn">CREATE</button>
                         <span id="have-account">Already have an account?</span>
+                        <br><div id="message" class="message"></div>
                     </form>
                 </div>
         </div>

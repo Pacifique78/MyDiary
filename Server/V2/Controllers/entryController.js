@@ -60,18 +60,21 @@ class EntryClass {
     }
 
     async getEntries(req, res) {
-        const selectQuerry = 'SELECT * FROM entries WHERE createdby=$1;';
+        const selectQuerry = 'SELECT * FROM entries WHERE createdby=$1 ORDER BY id;';
         const value = [req.tokenData.id];
         const results = await querry(selectQuerry, value);
         if (!results[0]) {
             return res.status(404).json({
                 status: 404,
+                userEmail: req.tokenData.email,
                 error: 'No entry found',
             });
         }
         return res.status(200).json({
             status: 200,
             message: 'Entries successfully retreived',
+            userEmail: req.tokenData.email,
+            id: req.tokenData.id,
             data: {
                 results,
             },

@@ -1,13 +1,11 @@
-const findDate = () => {
-    const mydate = new Date();
-    const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-    document.querySelector('.content-date').textContent = `${mydate.getDate()} ${months[mydate.getMonth()]} 2019`;
-};
-findDate();
+let isAdd = true;
+let myId = 'id';
 const printEntry = () => {
     const myEntries = document.getElementsByClassName('entry');
     for (const entry of myEntries) {
         entry.addEventListener('click', () => {
+            isAdd = false;
+            myId = entry.querySelector('.id').textContent;
             document.getElementById('content-box').style.display = 'block';
             document.querySelector('.show-up').style.display = 'none';
             const date = entry.querySelector('.date-div').textContent;
@@ -23,6 +21,8 @@ printEntry();
 const entries = document.getElementsByClassName('entry');
 for (const entry of entries) {
     entry.addEventListener('click', () => {
+        isAdd = false;
+        myId = entry.querySelector('.id').textContent;
         document.getElementById('content-box').style.display = 'block';
         document.querySelector('.show-up').style.display = 'none';
         const date = entry.querySelector('.date-div').textContent;
@@ -79,33 +79,59 @@ add.addEventListener('click', () => {
     document.querySelector('textarea').value = '';
 });
 const done = document.getElementById('done');
-done.addEventListener('click', () => {
+done.addEventListener('click', async (e) => {
+    e.preventDefault();
     const title = document.querySelector('.title-input').value;
-    const message = document.querySelector('textarea').value;
-    const entryFound = Array.from(entries).find(entry => entry.querySelector('.title').textContent === title);
-    if (entryFound) {
-        String.prototype.convert = function (to, remove, addStr) {
-            return this.slice(0, to) + addStr + this.slice(to + Math.abs(remove));
-        };
-        const slicedMessage = `${message.convert(60, 0, '<span class="hiden">')}</span>`;
-        entryFound.querySelector('.entry-content').innerHTML = slicedMessage;
-        document.getElementById('content-box').style.display = 'none';
-        document.querySelector('.show-up').style.display = 'block';
-    }
-    if (!entryFound) {
-        if (title) {
-            String.prototype.convert = function (to, remove, addStr) {
-                return this.slice(0, to) + addStr + this.slice(to + Math.abs(remove));
-            };
-            const slicedMessage = `${message.convert(60, 0, '<span class="hiden">')}</span>`;
-            const newDate = document.querySelector('.content-date').innerHTML;
-            const newEntry = `<div class="entry"><div class="date-div">${newDate}<br></div><div class="entry-summary"><span class="title">${title}</span><br><span class="entry-content">${slicedMessage}</span></div></div>`;
-            document.getElementById('list').innerHTML = document.getElementById('list').innerHTML + newEntry;
-            document.getElementById('content-box').style.display = 'none';
-            document.querySelector('.show-up').style.display = 'block';
+    const description = document.querySelector('textarea').value;
+    if (isAdd) {
+        const response = await fetch('http://localhost:4000/api/v2/entries', {
+            method: 'POST',
+            headers: {
+                Authorization: sessionStorage.getItem('Authorization'),
+                Accept: 'application/json, text/plain, */*',
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                title,
+                description,
+            }),
+        });
+        const json = await response.json();
+        if (json.error) {
+            if (json.status === 400) {
+                document.querySelector(`.${json.path}-input`).placeholder = json.error;
+            } else {
+                document.getElementsByClassName('container')[0].style.display = 'none';
+                document.getElementById('error').style.display = 'inline';
+            }
+        } else {
+            location.reload();
+        }
+    } else {
+        const response = await fetch(`http://localhost:4000/api/v2/entries/${Number(myId.slice(0, -1))}`, {
+            method: 'PATCH',
+            headers: {
+                Authorization: sessionStorage.getItem('Authorization'),
+                Accept: 'application/json, text/plain, */*',
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                title,
+                description,
+            }),
+        });
+        const json = await response.json();
+        if (json.error) {
+            if (json.status === 400) {
+                document.querySelector(`.${json.path}-input`).placeholder = json.error;
+            } else {
+                document.getElementsByClassName('container')[0].style.display = 'none';
+                document.getElementById('error').style.display = 'inline';
+            }
+        } else {
+            location.reload();
         }
     }
-    printEntry();
 });
 const inputFile = document.getElementById('input-file');
 const profilePicture = document.querySelector('.profile-image');
@@ -119,19 +145,30 @@ inputFile.addEventListener('change', () => {
     }
 });
 const deleteEntry = document.getElementById('delete-entry');
-deleteEntry.addEventListener('click', () => {
-    const title = document.querySelector('.title-input').value;
-    if (title) {
-        const arr = Array.from(entries);
-        const entry = arr.find(found => found.querySelector('.title').textContent === title);
-        if (entry) {
-            const confirmation = confirm('Do you rearly want to delete this entry???');
-            if (confirmation === true) {
-                entry.remove();
-                document.getElementById('content-box').style.display = 'none';
-                document.querySelector('.show-up').style.display = 'block';
+deleteEntry.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const response = await fetch(`http://localhost:4000/api/v2/entries/${Number(myId.slice(0, -1))}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: sessionStorage.getItem('Authorization'),
+            Accept: 'application/json, text/plain, */*',
+            'content-type': 'application/json',
+        },
+    });
+    if (response.status !== 204) {
+        const json = await response.json();
+        if (json.error) {
+            if (json.status === 404) {
+                document.getElementById('not-found-strong').innerHTML = 'The entry your trying to delete doesn\'t exists';
+                document.getElementById('error-add-entry').innerHTML = 'Try again!!!';
+                document.getElementById('not-found').style.display = 'inline';
+            } else {
+                document.getElementsByClassName('container')[0].style.display = 'none';
+                document.getElementById('error').style.display = 'inline';
             }
         }
+    } else {
+        location.reload();
     }
 });
 
@@ -265,3 +302,55 @@ if (mediaQuery500Px.matches) {
         }
     });
 }
+window.addEventListener('load', async (e) => {
+    e.preventDefault();
+    const response = await fetch('http://localhost:4000/api/v2/entries', {
+        headers: {
+            Authorization: sessionStorage.getItem('Authorization'),
+            Accept: 'application/json, text/plain, */*',
+            'content-type': 'application/json',
+        },
+    });
+    const json = await response.json();
+    document.getElementsByClassName('email')[0].innerHTML = json.userEmail || 'user-email@gmail.com';
+    if (json.error) {
+        if (json.status === 404) {
+            document.getElementById('not-found').style.display = 'inline';
+        } else {
+            document.getElementsByClassName('container')[0].style.display = 'none';
+            document.getElementById('error').style.display = 'inline';
+        }
+    } else {
+        json.data.results.forEach((result) => {
+            String.prototype.convert = function (to, remove, addStr) {
+                return this.slice(0, to) + addStr + this.slice(to + Math.abs(remove));
+            };
+            const description = `${result.description.convert(60, 0, '<span class="hiden">')}</span>`;
+            document.getElementById('list').innerHTML += `
+        <div class="entry">
+            <div class="date-div">
+                <span>${result.createdon.split(' ')[0]}</span><br>
+                <span>${result.createdon.split(' ')[1]}</span><br>
+                <span>${result.createdon.split(' ')[2]}</span><br>
+            </div>
+            <div class="entry-summary">
+                <span class="id"><strong>${result.id}.</strong> </span>
+                <span class="title">${result.title}</span><br>
+                <span class="entry-content">${description}</span>
+            </div>
+        </div>`;
+        });
+    }
+    printEntry();
+});
+document.getElementById('error-try-again').addEventListener('click', () => {
+    location.reload();
+});
+document.getElementById('error-add-entry').addEventListener('click', () => {
+    document.getElementById('add-entry').click();
+});
+document.getElementById('signout').addEventListener('click', (e) => {
+    e.preventDefault();
+    sessionStorage.removeItem('Authorization');
+    window.location.href = '../index.html';
+});
