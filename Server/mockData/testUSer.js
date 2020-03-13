@@ -3,6 +3,7 @@ const testUsers = [{
     lastName: 'testUser',
     email: 'testUser@gmail.com',
     password: 'password',
+    confirmPassword: 'password',
 }, {
     lastName: 'lastName',
     firstName: '',
@@ -25,6 +26,7 @@ const testUsers = [{
     lastName: 'testUser2',
     email: 'testUser2@gmail.com',
     password: 'password',
+    confirmPassword: 'password',
 }, {
     firstName: 'testUsertestUsertestUsertestUsertestUser',
     lastName: 'testUser',

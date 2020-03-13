@@ -121,7 +121,7 @@
     text-align: center;
     padding: 6px 0;
 }
-.entry-summary .title{
+.entry-summary .title, .id{
     font-weight: bolder;
     font-size: 21px;
 }
@@ -142,15 +142,12 @@
     display: none;
 }
 .content-date {
-    width: 50px;
-    height: 75px;
     padding: 20px;
     border: #fff solid 2px;
     font-weight: bold;
     text-align: center;
     background: #cfd0d2;
     color: #0179fc;
-    font-size: 25px;
     box-shadow: 3px 3px 10px 5px #fff;
     margin: 10px;
     border-radius: 5px;
@@ -470,4 +467,57 @@
     color: #ffffff;
     background: #209e00;
     cursor: pointer;
+}
+#error{
+    margin: 50px auto 40px auto;
+    width: 600px;
+    text-align: center;
+    display: none;
+}
+#error h1{
+    line-height: 60px;
+    font-size: 60px;
+    margin: 0px 0 50px 0;
+    color: firebrick;
+}
+#error p{
+    color: rgba(0, 0, 0, 0.5);
+    margin: 20px 0;
+    line-height: 1.6;
+}
+#error button{
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 2px;
+    background: rgba(0, 0, 0, 0.5);
+}
+#error button:hover{
+    background: firebrick;
+}
+#not-found{
+    margin: 50px auto 40px auto;
+    width: 600px;
+    text-align: center;
+    display: none;
+}
+#notfound h1{
+    line-height: 60px;
+    font-size: 60px;
+    margin: 0px 0 50px 0;
+    color: firebrick;
+}
+#not-found p{
+    color: rgba(0, 0, 0, 0.5);
+    margin: 20px 0;
+    line-height: 1.6;
+}
+#not-found button{
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 2px;
+    background: rgba(0, 0, 0, 0.5);
+    margin: auto 34%;
+}
+#error button:hover{
+    background: firebrick;
 }

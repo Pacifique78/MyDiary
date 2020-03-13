@@ -378,3 +378,35 @@
         width:90%
     }
 }
+
+.fields{
+    border-radius: 5px;
+    border: #f00 1px solid;
+    color: #f00;
+    background-color: #FFF;
+    margin: 25px auto;
+    width: 50%;
+    padding: 5px;
+    display: none;
+}
+.error{
+    border-radius: 5px;
+    border: #f00 1px solid;
+    color: #f00;
+    background-color: #FFF;
+    margin: 25px auto;
+    width: 50%;
+    padding: 5px;
+    display: none;
+}
+.message{
+    border-radius: 5px;
+    border: #248407 1px solid;
+    color: #248407;
+    background-color: #e8f0fe;
+    font-weight: bold;
+    margin: 25px auto;
+    width: 50%;
+    padding: 5px;
+    display: none;
+}
