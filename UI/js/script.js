@@ -51,7 +51,7 @@ document.getElementById('sbt-create').addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
 
-    const response = await fetch('http://localhost:4000/api/v2/auth/signup', {
+    const response = await fetch('https://my-diary-heroku.herokuapp.com/api/v2/auth/signup', {
         method: 'POST',
         headers: {
             Accept: 'application/json, text/plain, */*',
@@ -94,7 +94,7 @@ document.getElementById('sbt-login').addEventListener('submit', async (e) => {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
 
-    const response = await fetch('http://localhost:4000/api/v2/auth/signin', {
+    const response = await fetch('https://my-diary-heroku.herokuapp.com/api/v2/auth/signin', {
         method: 'POST',
         headers: {
             Accept: 'application/json, text/plain, */*',

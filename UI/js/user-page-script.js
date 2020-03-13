@@ -84,7 +84,7 @@ done.addEventListener('click', async (e) => {
     const title = document.querySelector('.title-input').value;
     const description = document.querySelector('textarea').value;
     if (isAdd) {
-        const response = await fetch('http://localhost:4000/api/v2/entries', {
+        const response = await fetch('https://my-diary-heroku.herokuapp.com/api/v2/entries', {
             method: 'POST',
             headers: {
                 Authorization: sessionStorage.getItem('Authorization'),
@@ -108,7 +108,7 @@ done.addEventListener('click', async (e) => {
             location.reload();
         }
     } else {
-        const response = await fetch(`http://localhost:4000/api/v2/entries/${Number(myId.slice(0, -1))}`, {
+        const response = await fetch(`https://my-diary-heroku.herokuapp.com/api/v2/entries/${Number(myId.slice(0, -1))}`, {
             method: 'PATCH',
             headers: {
                 Authorization: sessionStorage.getItem('Authorization'),
@@ -147,7 +147,7 @@ inputFile.addEventListener('change', () => {
 const deleteEntry = document.getElementById('delete-entry');
 deleteEntry.addEventListener('click', async (e) => {
     e.preventDefault();
-    const response = await fetch(`http://localhost:4000/api/v2/entries/${Number(myId.slice(0, -1))}`, {
+    const response = await fetch(`https://my-diary-heroku.herokuapp.com/api/v2/entries/${Number(myId.slice(0, -1))}`, {
         method: 'DELETE',
         headers: {
             Authorization: sessionStorage.getItem('Authorization'),
@@ -304,7 +304,7 @@ if (mediaQuery500Px.matches) {
 }
 window.addEventListener('load', async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:4000/api/v2/entries', {
+    const response = await fetch('https://my-diary-heroku.herokuapp.com/api/v2/entries', {
         headers: {
             Authorization: sessionStorage.getItem('Authorization'),
             Accept: 'application/json, text/plain, */*',
